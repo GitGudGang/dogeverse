@@ -1,4 +1,4 @@
-package com.dogo.gitgudgang.config;
+package com.gitgudgang.dogeverse.config;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;

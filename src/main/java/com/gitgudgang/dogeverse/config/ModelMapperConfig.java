@@ -1,4 +1,4 @@
-package com.dogo.gitgudgang.config;
+package com.gitgudgang.dogeverse.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

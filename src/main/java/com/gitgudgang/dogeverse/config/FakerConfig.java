@@ -1,4 +1,4 @@
-package com.dogo.gitgudgang.config;
+package com.gitgudgang.dogeverse.config;
 
 import com.github.javafaker.Faker;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.dogo.gitgudgang.config;
+package com.gitgudgang.dogeverse.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

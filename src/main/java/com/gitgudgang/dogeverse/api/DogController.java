@@ -1,7 +1,7 @@
-package com.dogo.gitgudgang.api;
+package com.gitgudgang.dogeverse.api;
 
-import com.dogo.gitgudgang.dto.DogDto;
-import com.dogo.gitgudgang.service.DogService;
+import com.gitgudgang.dogeverse.dto.DogDto;
+import com.gitgudgang.dogeverse.service.DogService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;

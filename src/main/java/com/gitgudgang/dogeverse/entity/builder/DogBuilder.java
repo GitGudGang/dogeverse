@@ -1,6 +1,6 @@
-package com.dogo.gitgudgang.entity.builder;
+package com.gitgudgang.dogeverse.entity.builder;
 
-import com.dogo.gitgudgang.entity.Dog;
+import com.gitgudgang.dogeverse.entity.Dog;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor

@@ -1,4 +1,4 @@
-package com.dogo.gitgudgang.dto;
+package com.gitgudgang.dogeverse.dto;
 
 import lombok.*;
 

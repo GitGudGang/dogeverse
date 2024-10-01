@@ -1,4 +1,4 @@
-package com.dogo.gitgudgang.config;
+package com.gitgudgang.dogeverse.config;
 
 import org.springframework.boot.autoconfigure.data.neo4j.Neo4jDataAutoConfiguration;
 import org.springframework.context.annotation.Configuration;

@@ -1,8 +1,8 @@
-package com.dogo.gitgudgang.config;
+package com.gitgudgang.dogeverse.config;
 
-import com.dogo.gitgudgang.entity.Dog;
-import com.dogo.gitgudgang.entity.builder.DogBuilder;
-import com.dogo.gitgudgang.repository.DogRepository;
+import com.gitgudgang.dogeverse.entity.Dog;
+import com.gitgudgang.dogeverse.entity.builder.DogBuilder;
+import com.gitgudgang.dogeverse.repository.DogRepository;
 import com.github.javafaker.Faker;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.ApplicationArguments;

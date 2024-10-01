@@ -1,7 +1,7 @@
-package com.dogo.gitgudgang.service;
+package com.gitgudgang.dogeverse.service;
 
-import com.dogo.gitgudgang.entity.Dog;
-import com.dogo.gitgudgang.repository.DogRepository;
+import com.gitgudgang.dogeverse.entity.Dog;
+import com.gitgudgang.dogeverse.repository.DogRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

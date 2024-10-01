@@ -1,4 +1,4 @@
-package com.dogo.gitgudgang.entity;
+package com.gitgudgang.dogeverse.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
