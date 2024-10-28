@@ -10,7 +10,7 @@ You need to implement 3 solutions:
 ➢Database design for all three databases  
 ➢ERD of the relational database  
 ➢Test data in all tables  
-➢Protection from SQL injection
+➢Protection from SQL injection  
 ➢Transactions  
 ➢Stored objects (Views, Stored procedures, Stored functions, Triggers, Events)  
 ➢An audit solution involving these triggers  
