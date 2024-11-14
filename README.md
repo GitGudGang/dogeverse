@@ -23,7 +23,7 @@ You need to implement 3 solutions:
 
 ### General Requirements:    
 ➢Databases should be complex enough to cover the curriculum of the whole course. For example, a relational database should have at least 10 tables.  
-➢Not all functionality needs to be implemented for all three databases.
+➢Not all functionality needs to be implemented for all three databases.  
 ➢The focus will be on the database and the backend server. Frontend is not part of the project. Use Postman, Swagger UI, etc. to simulate the interaction with a web client.
 ➢Databases can be hosted on the same web server or different ones.  
 ➢Choice of tech stack is up to the group.  
