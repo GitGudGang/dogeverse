@@ -67,12 +67,12 @@
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
             <version>${springboot.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-neo4j
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-neo4j-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-neo4j</artifactId>
             <version>${springboot.version}</version>
-        </dependency>-->
+        </dependency>
         <!-- https://mvnrepository.com/artifact/jakarta.persistence/jakarta.persistence-api
         <dependency>
             <groupId>jakarta.persistence</groupId>
