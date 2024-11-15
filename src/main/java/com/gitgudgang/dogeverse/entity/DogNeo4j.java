@@ -8,10 +8,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
+/*@AllArgsConstructor
 @NoArgsConstructor
 @Setter
-@Getter
+@Getter*/
 @Node("Dog") // Specifies this as a Neo4j node with label "Dog"
 public class DogNeo4j {
 

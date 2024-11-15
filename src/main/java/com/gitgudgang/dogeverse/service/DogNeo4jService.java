@@ -1,26 +1,33 @@
 package com.gitgudgang.dogeverse.service;
 
+import com.gitgudgang.dogeverse.dto.DogDto;
 import com.gitgudgang.dogeverse.entity.DogNeo4j;
 import com.gitgudgang.dogeverse.repository.DogNeo4jRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.modelmapper.ModelMapper;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class DogNeo4jService {
-
+    private final ModelMapper modelMapper;
     private final DogNeo4jRepository dogNeo4jRepository;
 
-    public DogNeo4j getDogById(Long id) {
-        return dogNeo4jRepository.findById(id)
+    public DogDto getDogById(Long id) {
+        DogNeo4j dogNeo4j = dogNeo4jRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Dog with id " + id + " not found"));
+        return modelMapper.map(dogNeo4j, DogDto.class);
     }
 
-    public List<DogNeo4j> getAllDogs() {
-        return dogNeo4jRepository.findAll();
+    public List<DogDto> getAllDogs() {
+        List<DogNeo4j> dogsNeo4j = dogNeo4jRepository.findAll();
+        return dogsNeo4j.stream()
+            .map(dogNeo4j -> modelMapper.map(dogNeo4j, DogDto.class))
+            .collect(Collectors.toList());
     }
 }
 
