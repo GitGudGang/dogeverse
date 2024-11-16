@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/dogs")
+@RequestMapping("/api/neo4j/dogs")
 @AllArgsConstructor
 public class DogController {
 
