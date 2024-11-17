@@ -6,9 +6,6 @@ import com.gitgudgang.dogeverse.service.DogService;
 
 import lombok.AllArgsConstructor;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,4 +36,3 @@ public class DogController {
         return dogService.saveDogInAllDatabases(dog);
     }
 }
-
