@@ -15,5 +15,4 @@ public class DogService {
     public Dog getDog(int id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("dog with id " + id + " not found"));
     }
-
 }

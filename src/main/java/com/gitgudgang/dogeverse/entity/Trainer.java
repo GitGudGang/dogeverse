@@ -7,6 +7,5 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-public class Dog extends Character {
-
+public class Trainer extends Character {
 }
