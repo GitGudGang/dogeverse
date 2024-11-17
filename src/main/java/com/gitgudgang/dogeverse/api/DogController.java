@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/neo4j/dogs")
+@RequestMapping("/api/dogs")
 @AllArgsConstructor
 public class DogController {
 

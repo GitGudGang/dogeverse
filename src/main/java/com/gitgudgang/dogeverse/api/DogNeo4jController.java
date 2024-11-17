@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/dogs")
+@RequestMapping("/api/neo4j/dogs")
 @AllArgsConstructor
 public class DogNeo4jController {
 
@@ -25,5 +25,10 @@ public class DogNeo4jController {
     @GetMapping
     public List<DogDto> getAllDogs() {
         return dogNeo4jService.getAllDogs();
+    }
+
+    @GetMapping("/names")
+    public List<String> getAllDogNames() {
+        return dogNeo4jService.getAllDogNames();
     }
 }

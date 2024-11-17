@@ -51,4 +51,7 @@ public class DogService {
     public void deleteDogFromMySQL(Dog dog) {
         dogRepository.delete(dog);
     }
+
+    
+
 }

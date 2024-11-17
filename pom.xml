@@ -76,6 +76,11 @@
             <artifactId>spring-boot-starter-data-neo4j</artifactId>
             <!--<version>${springboot.version}</version>-->
         </dependency>
+        <dependency>
+            <groupId>com.graphql-java-kickstart</groupId>
+            <artifactId>playground-spring-boot-starter</artifactId>
+            <version>11.1.0</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/jakarta.persistence/jakarta.persistence-api
         <dependency>
             <groupId>jakarta.persistence</groupId>

@@ -29,5 +29,9 @@ public class DogNeo4jService {
             .map(dogNeo4j -> modelMapper.map(dogNeo4j, DogDto.class))
             .collect(Collectors.toList());
     }
+
+    public List<String> getAllDogNames() {
+        return dogNeo4jRepository.getAllDogNames();
+    }
 }
 
