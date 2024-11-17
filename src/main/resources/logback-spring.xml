@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <include resource="org/springframework/boot/logging/logback/base.xml"/>
-
-    <!-- Set the root logger level and appender -->
-    <root level="INFO">
-        <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="FILE"/>
-    </root>
-
     <!-- Console appender -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -27,15 +19,19 @@
         </rollingPolicy>
     </appender>
 
+
+
     <!-- Custom logger configurations -->
     <logger name="org.springframework.security" level="INFO"/>
     <logger name="org.springframework.boot.autoconfigure" level="INFO"/>
     <logger name="org.springframework.web.filter" level="INFO"/>
 
-    <logger name="org.hibernate" level="DEBUG"/>
-    <logger name="org.mongodb" level="DEBUG"/>
-    <!-- <logger name="org.hibernate.SQL" level="DEBUG"/> -->
+    <logger name="org.hibernate" level="INFO"/>
     <logger name="org.springframework.data" level="INFO"/>
-    <!-- <logger name="org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider" level="TRACE"/> -->
 
+    <!-- Set the root logger level and appender -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
 </configuration>

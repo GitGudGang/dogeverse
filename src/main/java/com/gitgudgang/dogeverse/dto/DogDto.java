@@ -8,6 +8,6 @@ import lombok.*;
 @Getter
 @Setter
 public class DogDto {
-    private int id;
+
     private String name;
 }
