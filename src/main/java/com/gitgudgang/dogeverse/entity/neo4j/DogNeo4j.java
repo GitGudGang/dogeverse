@@ -1,6 +1,9 @@
-package com.gitgudgang.dogeverse.entity;
+package com.gitgudgang.dogeverse.entity.neo4j;
 
 import org.springframework.data.neo4j.core.schema.Id;
+
+import java.util.List;
+
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Node;
 import lombok.AllArgsConstructor;
@@ -12,12 +15,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-@Node("Dog") // Specifies this as a Neo4j node with label "Dog"
+@Node("Dog")
 public class DogNeo4j {
 
     @Id
     @GeneratedValue
     private Long id;
-
     private String name;
+    private List<AchievementNeo4j> achievements;
+    private StatsNeo4j stats;
 }

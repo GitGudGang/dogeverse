@@ -1,7 +1,8 @@
 package com.gitgudgang.dogeverse.service;
 
 import com.gitgudgang.dogeverse.dto.DogDto;
-import com.gitgudgang.dogeverse.entity.DogNeo4j;
+import com.gitgudgang.dogeverse.dto.neo4j.NodeDogDto;
+import com.gitgudgang.dogeverse.entity.neo4j.DogNeo4j;
 import com.gitgudgang.dogeverse.repository.DogNeo4jRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
@@ -30,7 +31,7 @@ public class DogNeo4jService {
             .collect(Collectors.toList());
     }
 
-    public List<String> getAllDogNames() {
+    public List<NodeDogDto> getAllDogNames() {
         return dogNeo4jRepository.getAllDogNames();
     }
 }

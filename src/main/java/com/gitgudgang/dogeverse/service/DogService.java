@@ -2,7 +2,7 @@ package com.gitgudgang.dogeverse.service;
 
 import com.gitgudgang.dogeverse.entity.Dog;
 import com.gitgudgang.dogeverse.dto.DogDto;
-import com.gitgudgang.dogeverse.entity.DogNeo4j;
+import com.gitgudgang.dogeverse.entity.neo4j.DogNeo4j;
 import com.gitgudgang.dogeverse.repository.DogNeo4jRepository;
 import com.gitgudgang.dogeverse.repository.DogRepository;
 import jakarta.persistence.EntityNotFoundException;
