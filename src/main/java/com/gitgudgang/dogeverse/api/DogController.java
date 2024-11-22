@@ -32,7 +32,7 @@ public class DogController {
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public DogDto createDog(@RequestBody Dog dog) {
-        // Save the dog entity in MySQL and Neo4j
+        // Save the dog entity in MySQL, Neo4j, and MongoDB
         return dogService.saveDogInAllDatabases(dog);
     }
 }

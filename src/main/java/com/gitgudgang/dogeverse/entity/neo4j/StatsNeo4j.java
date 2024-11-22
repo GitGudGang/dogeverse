@@ -2,8 +2,8 @@ package com.gitgudgang.dogeverse.entity.neo4j;
 
 import org.springframework.data.neo4j.core.schema.Node;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import org.springframework.data.neo4j.core.schema.GeneratedValue;
+import org.springframework.data.neo4j.core.schema.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-@Node("Achievement")
+@Node("Stats")
 public class StatsNeo4j {
     @Id
     @GeneratedValue

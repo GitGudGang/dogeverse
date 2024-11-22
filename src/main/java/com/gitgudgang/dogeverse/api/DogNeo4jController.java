@@ -1,11 +1,10 @@
 package com.gitgudgang.dogeverse.api;
 import com.gitgudgang.dogeverse.dto.DogDto;
-import com.gitgudgang.dogeverse.dto.NodeDogDto;
+import com.gitgudgang.dogeverse.dto.neo4j.NodeDogDto;
 import com.gitgudgang.dogeverse.service.DogNeo4jService;
 
 import lombok.AllArgsConstructor;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

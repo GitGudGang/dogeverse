@@ -1,9 +1,11 @@
 package com.gitgudgang.dogeverse.service;
 
 import com.gitgudgang.dogeverse.entity.Dog;
+import com.gitgudgang.dogeverse.entity.mongodb.DogMongo;
 import com.gitgudgang.dogeverse.dto.DogDto;
 import com.gitgudgang.dogeverse.entity.neo4j.DogNeo4j;
 import com.gitgudgang.dogeverse.repository.DogNeo4jRepository;
+import com.gitgudgang.dogeverse.repository.DogMongoRepository;
 import com.gitgudgang.dogeverse.repository.DogRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
@@ -18,6 +20,7 @@ public class DogService {
 
     private final DogRepository dogRepository;
     private final DogNeo4jRepository dogNeo4jRepository;
+    private final DogMongoRepository dogMongoRepository;
     private final ModelMapper modelMapper;
 
     public Dog getDog(int id) {
@@ -28,6 +31,7 @@ public class DogService {
         Dog savedDog = saveDogInMySQL(dog);
         try {
             saveDogInNeo4j(savedDog);
+            saveDogInMongoDB(savedDog);
         } catch (Exception e) {
             // Compensating action: Rollback MySQL save
             dogRepository.delete(savedDog);
@@ -39,6 +43,11 @@ public class DogService {
     //@Transactional(transactionManager = "mysqlTransactionManager")
     public Dog saveDogInMySQL(Dog dog) {
         return dogRepository.save(dog);
+    }
+
+    public void saveDogInMongoDB(Dog dog) {
+        DogMongo dogMongo = modelMapper.map(dog, DogMongo.class);
+        dogMongoRepository.save(dogMongo);
     }
 
     @Transactional(transactionManager = "neo4jTransactionManager")

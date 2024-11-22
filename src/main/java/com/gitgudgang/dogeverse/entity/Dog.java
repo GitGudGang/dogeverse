@@ -19,7 +19,6 @@ public class Dog {
     @Id
     @GeneratedValue
     private Long id;
-
     private String name;
-
+    private String breed;
 }
