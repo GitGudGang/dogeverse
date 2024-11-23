@@ -27,20 +27,15 @@ public class DogService {
         return dogRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("dog with id " + id + " not found"));
     }
 
+    @Transactional
     public DogDto saveDogInAllDatabases(Dog dog) {
-        Dog savedDog = saveDogInMySQL(dog);
-        try {
-            saveDogInNeo4j(savedDog);
-            saveDogInMongoDB(savedDog);
-        } catch (Exception e) {
-            // Compensating action: Rollback MySQL save
-            dogRepository.delete(savedDog);
-            throw new RuntimeException("Failed to save Dog in all databases: " + e.getMessage(), e);
-        }
-        return modelMapper.map(savedDog, DogDto.class);
+        dogRepository.save(dog);
+        saveDogInMySQL(dog);
+        saveDogInNeo4j(dog);
+        saveDogInMongoDB(dog);
+        return modelMapper.map(dog, DogDto.class);
     }
 
-    //@Transactional(transactionManager = "mysqlTransactionManager")
     public Dog saveDogInMySQL(Dog dog) {
         return dogRepository.save(dog);
     }
@@ -50,15 +45,18 @@ public class DogService {
         dogMongoRepository.save(dogMongo);
     }
 
-    @Transactional(transactionManager = "neo4jTransactionManager")
     public void saveDogInNeo4j(Dog dog) {
         DogNeo4j dogNeo4j = modelMapper.map(dog, DogNeo4j.class);
         dogNeo4jRepository.save(dogNeo4j);
     }
 
-    //@Transactional(transactionManager = "mysqlTransactionManager")
     public void deleteDogFromMySQL(Dog dog) {
         dogRepository.delete(dog);
+    }
+
+    public void deleteDogInNeo4j(Dog dog) {
+        DogNeo4j dogNeo4j = modelMapper.map(dog, DogNeo4j.class);
+        dogNeo4jRepository.delete(dogNeo4j);
     }
 
     
