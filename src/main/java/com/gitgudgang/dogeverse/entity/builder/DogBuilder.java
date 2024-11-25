@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class DogBuilder {
-
+// The builder can be used for making testing objects
     private Dog dog;
 
     public static DogBuilder create() {
