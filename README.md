@@ -42,11 +42,13 @@ You need to implement 3 solutions:
 ### Databases for Developers - Exam
 The exam will be oral, externally censored, and graded according to the 7-grade scale:
 grading scale
+
 ### The exam will take a maximum of 30 minutes per student:
 ➢ Project presentation (PowerPoint presentation + demo): 10 min. The final project will be 
-developed in groups, but it will be presented individually.
-➢ Questions by the examiner and the censor: 15 min 
-➢ Grading: 5min
+developed in groups, but it will be presented individually. <br />
+➢ Questions by the examiner and the censor: 15 min <br />
+➢ Grading: 5min <br />
+
 ### Each individual grade will be based on:
 ➢ Quality of the final project
 ➢ Project report
@@ -60,13 +62,13 @@ to use whichever tool they consider appropriate.
 
 ### The project presentation will consist of:
 ➢ A demonstration of the CRUD application from a functional perspective (one can use 
-swagger, postman, etc.)
+swagger, postman, etc.) <br />
 ➢ A brief explanation of the relational database solution, including design and 
-implementation decisions.
+implementation decisions. <br />
 ➢ A brief explanation of the document database solution, including design and 
-implementation decisions.
+implementation decisions. <br />
 ➢ A brief explanation of the graph database solution, including design and implementation 
-decisions.
+decisions. <br />
 
 Examiner and censor can ask questions regarding any part of the project or the subject’s
 curriculum. They can also request the student to perform live coding (for example 
