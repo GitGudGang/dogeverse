@@ -50,9 +50,9 @@ developed in groups, but it will be presented individually. <br />
 ➢ Grading: 5min <br />
 
 ### Each individual grade will be based on:
-➢ Quality of the final project
-➢ Project report
-➢ Performance at the exam (presentation + questions)
+➢ Quality of the final project <br />
+➢ Project report <br />
+➢ Performance at the exam (presentation + questions) <br />
 
 Students will bring their laptops to the exam. The documentation must be already open, and 
 the application and the database servers must be running before the exam starts - otherwise
