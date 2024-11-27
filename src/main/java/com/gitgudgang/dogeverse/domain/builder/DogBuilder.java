@@ -24,6 +24,11 @@ public class DogBuilder {
         return this;
     }
 
+    public DogBuilder withBreed(String breed) {
+        this.dog.setBreed(breed);
+        return this;
+    }
+
     public Dog build() {
         var temp = dog;
         dog = null;

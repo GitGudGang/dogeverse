@@ -25,15 +25,14 @@ public class DogController {
     private final ModelMapper modelMapper;
 
     @GetMapping("/{id}")
-    public DogDto getDog(@PathVariable int id) {
+    public DogDto getDog(@PathVariable long id) {
         return modelMapper.map(dogService.getDog(id), DogDto.class);
     }
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public DogDto createDog(@RequestBody DogDto dogDto) {
-        // Save the dog entity in MySQL, Neo4j, and MongoDB
         var dog = modelMapper.map(dogDto, Dog.class);
-        return dogService.saveDog(dog);
+        return modelMapper.map(dogService.saveDog(dog), DogDto.class);
     }
 }
