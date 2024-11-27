@@ -1,10 +1,8 @@
 package com.gitgudgang.dogeverse.api;
 
 import com.gitgudgang.dogeverse.dto.AchievementDto;
-import com.gitgudgang.dogeverse.dto.DogDto;
-import com.gitgudgang.dogeverse.entity.Achievement;
+import com.gitgudgang.dogeverse.entity.AchievementEntity;
 import com.gitgudgang.dogeverse.service.AchievementService;
-import com.gitgudgang.dogeverse.service.DogService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,8 +27,8 @@ public class AchievementController {
 
     @PostMapping("/success/{id}/{successes}")
     AchievementDto updateAchievement(@PathVariable int id, @PathVariable int successes) {
-         Achievement achievement = achievementService.updateSuccesses(id, successes);
-         return modelMapper.map(achievement, AchievementDto.class);
+         AchievementEntity achievementEntity = achievementService.updateSuccesses(id, successes);
+         return modelMapper.map(achievementEntity, AchievementDto.class);
     }
 
     @GetMapping("/checkAchievements/{id}")

@@ -12,7 +12,7 @@ import org.hibernate.validator.constraints.Range;
 @Setter
 @Getter
 @Entity
-public class Stat {
+public class StatEntity {
     @Id
     @GeneratedValue
     private Long id;

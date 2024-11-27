@@ -1,6 +1,7 @@
-package com.gitgudgang.dogeverse.entity.neo4j;
+package com.gitgudgang.dogeverse.node;
 
 import org.springframework.data.neo4j.core.schema.Node;
+import org.springframework.data.neo4j.core.schema.Relationship;
 
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
@@ -13,11 +14,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-@Node("Skill")
-public class SkillNeo4j {
+@Node("Trainer")
+public class TrainerNode {
+
     @Id
     @GeneratedValue
     private Long id;
     private String name;
-    private String description;
+    
+    @Relationship(type = "HAS_STATS", direction = Relationship.Direction.OUTGOING)
+    private StatsNode stats;
 }

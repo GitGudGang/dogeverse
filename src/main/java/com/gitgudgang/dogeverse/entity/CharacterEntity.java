@@ -15,7 +15,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class Character {
+public abstract class CharacterEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,6 +25,6 @@ public abstract class Character {
     // Character has 3 stats: str, dex and int here
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "character_id")
-    private Set<Stat> stats = new HashSet<>();
+    private Set<StatEntity> stats = new HashSet<>();
 
 }

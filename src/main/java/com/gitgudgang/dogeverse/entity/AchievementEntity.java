@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-public class Achievement {
+public class AchievementEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
