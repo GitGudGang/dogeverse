@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.Range;
 @Setter
 @Getter
 @Entity
-public class Skill {
+public class SkillEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

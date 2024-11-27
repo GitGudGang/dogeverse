@@ -1,12 +1,13 @@
 package com.gitgudgang.dogeverse.service;
 
-import com.gitgudgang.dogeverse.entity.Dog;
-import com.gitgudgang.dogeverse.entity.mongodb.DogMongo;
+import com.gitgudgang.dogeverse.domain.Dog;
+import com.gitgudgang.dogeverse.entity.DogEntity;
+import com.gitgudgang.dogeverse.document.DogMongo;
 import com.gitgudgang.dogeverse.dto.DogDto;
-import com.gitgudgang.dogeverse.entity.neo4j.DogNeo4j;
+import com.gitgudgang.dogeverse.node.DogNode;
+import com.gitgudgang.dogeverse.repository.DogJpaRepository;
 import com.gitgudgang.dogeverse.repository.DogNeo4jRepository;
 import com.gitgudgang.dogeverse.repository.DogMongoRepository;
-import com.gitgudgang.dogeverse.repository.DogRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 
@@ -18,47 +19,41 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class DogService {
 
-    private final DogRepository dogRepository;
+    private final DogJpaRepository dogJpaRepository;
     private final DogNeo4jRepository dogNeo4jRepository;
     private final DogMongoRepository dogMongoRepository;
     private final ModelMapper modelMapper;
 
-    public Dog getDog(int id) {
-        return dogRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("dog with id " + id + " not found"));
+    public DogEntity getDog(int id) {
+        return dogJpaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("dog with id " + id + " not found"));
     }
 
     @Transactional
-    public DogDto saveDogInAllDatabases(Dog dog) {
-        dogRepository.save(dog);
-        saveDogInMySQL(dog);
-        saveDogInNeo4j(dog);
-        saveDogInMongoDB(dog);
+    public DogDto saveDog(Dog dog) {
+        var savedDog = saveToRelationalDb(dog);
+        saveToGraphDb(savedDog);
+        saveToDocumentDb(savedDog);
         return modelMapper.map(dog, DogDto.class);
     }
 
-    public Dog saveDogInMySQL(Dog dog) {
-        return dogRepository.save(dog);
+    private Dog saveToRelationalDb(Dog dog) {
+        var dogEntity = dogJpaRepository.save(modelMapper.map(dog, DogEntity.class));
+        return modelMapper.map(dogEntity, Dog.class);
     }
 
-    public void saveDogInMongoDB(Dog dog) {
-        DogMongo dogMongo = modelMapper.map(dog, DogMongo.class);
-        dogMongoRepository.save(dogMongo);
+    private Dog saveToDocumentDb(Dog dog) {
+        var dogMongo = dogMongoRepository.save(modelMapper.map(dog, DogMongo.class));
+        return modelMapper.map(dogMongo, Dog.class);
     }
 
-    public void saveDogInNeo4j(Dog dog) {
-        DogNeo4j dogNeo4j = modelMapper.map(dog, DogNeo4j.class);
-        dogNeo4jRepository.save(dogNeo4j);
+    private Dog saveToGraphDb(Dog dog) {
+        DogNode dogNeo = dogNeo4jRepository.save(modelMapper.map(dog, DogNode.class));
+        return modelMapper.map(dogNeo, Dog.class);
     }
-
-    public void deleteDogFromMySQL(Dog dog) {
-        dogRepository.delete(dog);
+    @Transactional
+    public void deleteDog(Dog dog) {
+        dogJpaRepository.delete(modelMapper.map(dog, DogEntity.class));
+        dogMongoRepository.delete(modelMapper.map(dog, DogMongo.class));
+        dogNeo4jRepository.delete(modelMapper.map(dog, DogNode.class));
     }
-
-    public void deleteDogInNeo4j(Dog dog) {
-        DogNeo4j dogNeo4j = modelMapper.map(dog, DogNeo4j.class);
-        dogNeo4jRepository.delete(dogNeo4j);
-    }
-
-    
-
 }

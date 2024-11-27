@@ -1,4 +1,4 @@
-package com.gitgudgang.dogeverse.entity.mongodb;
+package com.gitgudgang.dogeverse.document;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 

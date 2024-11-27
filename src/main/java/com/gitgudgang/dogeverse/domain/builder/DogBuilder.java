@@ -1,6 +1,7 @@
-package com.gitgudgang.dogeverse.entity.builder;
+package com.gitgudgang.dogeverse.domain.builder;
 
-import com.gitgudgang.dogeverse.entity.Dog;
+import com.gitgudgang.dogeverse.domain.Dog;
+import com.gitgudgang.dogeverse.entity.DogEntity;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor

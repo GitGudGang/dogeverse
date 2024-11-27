@@ -1,11 +1,11 @@
 package com.gitgudgang.dogeverse.repository;
 
 
-import com.gitgudgang.dogeverse.entity.Achievement;
+import com.gitgudgang.dogeverse.entity.AchievementEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AchievementRepository extends CrudRepository<Achievement, Integer> {
+public interface AchievementRepository extends CrudRepository<AchievementEntity, Integer> {
     
 }

@@ -1,4 +1,4 @@
-package com.gitgudgang.dogeverse.entity.builder;
+package com.gitgudgang.dogeverse.domain.builder;
 
 import lombok.NoArgsConstructor;
 

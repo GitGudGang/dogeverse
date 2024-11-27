@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.gitgudgang.dogeverse.entity.mongodb.DogMongo;
+import com.gitgudgang.dogeverse.document.DogMongo;
 
 @Repository
 public interface DogMongoRepository extends MongoRepository<DogMongo, String> {

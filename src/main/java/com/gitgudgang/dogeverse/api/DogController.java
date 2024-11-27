@@ -1,7 +1,7 @@
 package com.gitgudgang.dogeverse.api;
 
+import com.gitgudgang.dogeverse.domain.Dog;
 import com.gitgudgang.dogeverse.dto.DogDto;
-import com.gitgudgang.dogeverse.entity.Dog;
 import com.gitgudgang.dogeverse.service.DogService;
 
 import lombok.AllArgsConstructor;
@@ -31,8 +31,9 @@ public class DogController {
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public DogDto createDog(@RequestBody Dog dog) {
+    public DogDto createDog(@RequestBody DogDto dogDto) {
         // Save the dog entity in MySQL, Neo4j, and MongoDB
-        return dogService.saveDogInAllDatabases(dog);
+        var dog = modelMapper.map(dogDto, Dog.class);
+        return dogService.saveDog(dog);
     }
 }

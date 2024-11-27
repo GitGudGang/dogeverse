@@ -1,4 +1,4 @@
-package com.gitgudgang.dogeverse.entity.neo4j;
+package com.gitgudgang.dogeverse.node;
 
 import org.springframework.data.neo4j.core.schema.Node;
 
@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Node("Stats")
-public class StatsNeo4j {
+public class StatsNode {
     @Id
     @GeneratedValue
     private Long id;

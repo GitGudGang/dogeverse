@@ -1,12 +1,13 @@
-package com.gitgudgang.dogeverse.entity;
+package com.gitgudgang.dogeverse.domain;
 
-import jakarta.persistence.Entity;
+import com.gitgudgang.dogeverse.entity.CharacterEntity;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
-@Entity
 public class Dog extends Character {
     private String breed;
+
+    private Trainer trainer;
 }

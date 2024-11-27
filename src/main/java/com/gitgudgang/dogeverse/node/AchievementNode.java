@@ -1,4 +1,4 @@
-package com.gitgudgang.dogeverse.entity.neo4j;
+package com.gitgudgang.dogeverse.node;
 
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Node("Achievement")
-public class AchievementNeo4j {
+public class AchievementNode {
     @Id
     @GeneratedValue
     private Long id;

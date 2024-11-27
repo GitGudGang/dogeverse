@@ -1,9 +1,9 @@
 package com.gitgudgang.dogeverse.repository;
 
-import com.gitgudgang.dogeverse.entity.Dog;
+import com.gitgudgang.dogeverse.entity.DogEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DogRepository extends CrudRepository<Dog, Integer> {
+public interface DogJpaRepository extends CrudRepository<DogEntity, Integer> {
 }
