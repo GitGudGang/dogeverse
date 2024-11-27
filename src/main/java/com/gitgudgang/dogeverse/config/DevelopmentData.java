@@ -33,7 +33,7 @@ public class DevelopmentData implements ApplicationRunner {
     }
 
     private Dog generateFakeDog() {
-        return DogBuilder.create().withName(faker.dog().name()).build();
+        return DogBuilder.create().withName(faker.dog().name()).withBreed(faker.dog().breed()).build();
     }
 
     private void generateAndInsertAchievements() {
