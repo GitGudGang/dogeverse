@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.gitgudgang.dogeverse.entity.TrainerEntity;
 
+import java.util.UUID;
+
 @Repository
-public interface TrainerRepository extends CrudRepository<TrainerEntity, Integer>{
+public interface TrainerRepository extends CrudRepository<TrainerEntity, UUID>{
     
 }

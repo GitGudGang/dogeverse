@@ -1,5 +1,5 @@
 package com.gitgudgang.dogeverse.document;
 
-public class AchievementMongo {
+public class AchievementDocument {
     
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,7 +19,7 @@ public class DogNeo4jService {
     private final ModelMapper modelMapper;
     private final DogNeo4jRepository dogNeo4jRepository;
 
-    public DogDto getDogById(Long id) {
+    public DogDto getDogById(UUID id) {
         DogNode dogNeo4j = dogNeo4jRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Dog with id " + id + " not found"));
         return modelMapper.map(dogNeo4j, DogDto.class);

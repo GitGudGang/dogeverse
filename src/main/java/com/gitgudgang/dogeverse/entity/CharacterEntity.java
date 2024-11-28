@@ -18,7 +18,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public abstract class CharacterEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
     private String name;

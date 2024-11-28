@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 
+import java.util.UUID;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -15,8 +17,7 @@ import org.hibernate.validator.constraints.Range;
 @Entity
 public class SkillEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private UUID id;
 
     private String name;
 

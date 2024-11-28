@@ -6,17 +6,19 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @AllArgsConstructor
 public class AchievementService {
 
     private AchievementRepository repository;
 
-    public AchievementEntity getAchievement(int id) {
+    public AchievementEntity getAchievement(UUID id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Achievement with id " + id + " not found"));
     }
 
-    public AchievementEntity updateSuccesses(int id, int successes)
+    public AchievementEntity updateSuccesses(UUID id, int successes)
     {
 
        AchievementEntity achievementEntity = repository.findById(id).get();
@@ -25,7 +27,7 @@ public class AchievementService {
         return achievementEntity;
     }
 
-    public String checkAchievementStatus(int id)
+    public String checkAchievementStatus(UUID id)
     {
         AchievementEntity achievementEntity = repository.findById(id).get();
         int currentSuccesses = repository.findById(id).get().getSuccesses();

@@ -8,6 +8,5 @@ import lombok.Setter;
 @Getter
 public class Dog extends Character {
     private String breed;
-
     private Trainer trainer;
 }

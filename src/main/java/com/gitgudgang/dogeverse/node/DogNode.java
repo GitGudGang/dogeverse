@@ -4,6 +4,7 @@ import org.springframework.data.neo4j.core.schema.Id;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Node;
@@ -23,7 +24,7 @@ public class DogNode {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private UUID id;
     private String name;
     private String breed;
 

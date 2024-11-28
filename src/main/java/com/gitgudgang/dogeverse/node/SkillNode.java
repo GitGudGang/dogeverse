@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -17,7 +19,7 @@ import lombok.Setter;
 public class SkillNode {
     @Id
     @GeneratedValue
-    private Long id;
+    private UUID id;
     private String name;
     private String description;
 }
