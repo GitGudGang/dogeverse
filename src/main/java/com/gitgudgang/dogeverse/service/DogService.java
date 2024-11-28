@@ -4,9 +4,10 @@ import com.gitgudgang.dogeverse.entity.Dog;
 import com.gitgudgang.dogeverse.entity.mongodb.DogMongo;
 import com.gitgudgang.dogeverse.dto.DogDto;
 import com.gitgudgang.dogeverse.entity.neo4j.DogNeo4j;
-import com.gitgudgang.dogeverse.repository.DogNeo4jRepository;
 import com.gitgudgang.dogeverse.repository.DogMongoRepository;
 import com.gitgudgang.dogeverse.repository.DogRepository;
+import com.gitgudgang.dogeverse.repository.neo4j.DogNeo4jRepository;
+
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 

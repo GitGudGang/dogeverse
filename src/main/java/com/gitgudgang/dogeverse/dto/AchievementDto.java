@@ -13,7 +13,7 @@ public class AchievementDto {
     private int id;
     private String name;
     private int successes;
-    private final int basic = 50;
-    private final int intermediate = 100;
-    private final int advanced = 150;
+    // private final int basic = 50;
+    // private final int intermediate = 100;
+    // private final int advanced = 150;
 }

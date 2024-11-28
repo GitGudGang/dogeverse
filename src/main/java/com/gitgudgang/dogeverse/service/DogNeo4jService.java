@@ -3,7 +3,8 @@ package com.gitgudgang.dogeverse.service;
 import com.gitgudgang.dogeverse.dto.DogDto;
 import com.gitgudgang.dogeverse.dto.neo4j.NodeDogDto;
 import com.gitgudgang.dogeverse.entity.neo4j.DogNeo4j;
-import com.gitgudgang.dogeverse.repository.DogNeo4jRepository;
+import com.gitgudgang.dogeverse.repository.neo4j.DogNeo4jRepository;
+
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

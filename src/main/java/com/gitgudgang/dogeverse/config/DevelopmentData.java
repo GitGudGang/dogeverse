@@ -4,8 +4,8 @@ import com.gitgudgang.dogeverse.entity.Achievement;
 import com.gitgudgang.dogeverse.entity.Dog;
 import com.gitgudgang.dogeverse.entity.builder.AchievementBuilder;
 import com.gitgudgang.dogeverse.entity.builder.DogBuilder;
-import com.gitgudgang.dogeverse.repository.AchievementRepository;
 import com.gitgudgang.dogeverse.repository.DogRepository;
+import com.gitgudgang.dogeverse.repository.neo4j.AchievementRepository;
 import com.github.javafaker.Faker;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
@@ -50,6 +50,6 @@ public class DevelopmentData implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
         generateAndInsertDogs(10);
-        generateAndInsertAchievements();
+        // generateAndInsertAchievements();
     }
 }

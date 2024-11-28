@@ -1,4 +1,4 @@
-package com.gitgudgang.dogeverse.repository;
+package com.gitgudgang.dogeverse.repository.neo4j;
 
 import com.gitgudgang.dogeverse.dto.neo4j.NodeDogDto;
 import com.gitgudgang.dogeverse.entity.neo4j.DogNeo4j;

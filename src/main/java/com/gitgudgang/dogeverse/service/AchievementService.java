@@ -2,7 +2,8 @@ package com.gitgudgang.dogeverse.service;
 
 import com.gitgudgang.dogeverse.entity.Achievement;
 import com.gitgudgang.dogeverse.entity.Dog;
-import com.gitgudgang.dogeverse.repository.AchievementRepository;
+import com.gitgudgang.dogeverse.repository.neo4j.AchievementRepository;
+
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

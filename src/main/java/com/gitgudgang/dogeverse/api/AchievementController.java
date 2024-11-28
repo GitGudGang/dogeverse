@@ -3,6 +3,7 @@ package com.gitgudgang.dogeverse.api;
 import com.gitgudgang.dogeverse.dto.AchievementDto;
 import com.gitgudgang.dogeverse.dto.DogDto;
 import com.gitgudgang.dogeverse.entity.Achievement;
+import com.gitgudgang.dogeverse.repository.neo4j.AchievementRepository;
 import com.gitgudgang.dogeverse.service.AchievementService;
 import com.gitgudgang.dogeverse.service.DogService;
 import lombok.AllArgsConstructor;
@@ -22,9 +23,8 @@ public class AchievementController {
     private ModelMapper modelMapper;
 
     @GetMapping("/{id}")
-    AchievementDto getAchievement(@PathVariable int id) {
-         achievementService.getAchievement(id);
-         return modelMapper.map(achievementService.getAchievement(id), AchievementDto.class);
+    Achievement getAchievement(@PathVariable int id) {
+         return achievementService.getAchievement(id);
     }
 
     @PostMapping("/success/{id}/{successes}")

@@ -88,6 +88,13 @@
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.neo4j/neo4j -->
 
+<!-- Neo4j Java Driver -->
+    <!-- <dependency>
+        <groupId>org.neo4j.driver</groupId>
+        <artifactId>neo4j-java-driver</artifactId>
+    </dependency>
+</dependencies> -->
+
          <dependency>
              <groupId>com.graphql-java-kickstart</groupId>
              <artifactId>playground-spring-boot-starter</artifactId>
