@@ -1,21 +1,21 @@
-package com.gitgudgang.dogeverse.entity.builder;
+package com.gitgudgang.dogeverse.domain.builder;
 
-import com.gitgudgang.dogeverse.entity.Achievement;
+import com.gitgudgang.dogeverse.entity.AchievementEntity;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class AchievementBuilder {
     
-     private Achievement achievement;
+     private AchievementEntity achievement;
 
     public static AchievementBuilder create() {
         var aBuilder = new AchievementBuilder();
-        var achievement = new Achievement();
+        var achievement = new AchievementEntity();
         aBuilder.setAchievement(achievement);
         return aBuilder;
     }
-    private void setAchievement(Achievement achievement) {
-        this.achievement = achievement;
+    private void setAchievement(AchievementEntity achievementEntity) {
+        this.achievement = achievementEntity;
     }
 
     public AchievementBuilder withName(String name) {
@@ -28,7 +28,7 @@ public class AchievementBuilder {
         this.achievement.setSuccesses(successCount);
     }
 
-    public Achievement build() {
+    public AchievementEntity build() {
         var temp = achievement;
         achievement = null;
         return temp;

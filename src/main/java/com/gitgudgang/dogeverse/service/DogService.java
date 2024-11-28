@@ -1,65 +1,47 @@
 package com.gitgudgang.dogeverse.service;
 
-import com.gitgudgang.dogeverse.entity.Dog;
-import com.gitgudgang.dogeverse.entity.mongodb.DogMongo;
-import com.gitgudgang.dogeverse.dto.DogDto;
-import com.gitgudgang.dogeverse.entity.neo4j.DogNeo4j;
-import com.gitgudgang.dogeverse.repository.DogMongoRepository;
-import com.gitgudgang.dogeverse.repository.DogRepository;
-import com.gitgudgang.dogeverse.repository.neo4j.DogNeo4jRepository;
-
+import com.gitgudgang.dogeverse.domain.Dog;
+import com.gitgudgang.dogeverse.entity.DogEntity;
+import com.gitgudgang.dogeverse.document.DogMongo;
+import com.gitgudgang.dogeverse.node.DogNode;
+import com.gitgudgang.dogeverse.repository.*;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.AllArgsConstructor;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@AllArgsConstructor
 public class DogService {
 
-    private final DogRepository dogRepository;
-    private final DogNeo4jRepository dogNeo4jRepository;
-    private final DogMongoRepository dogMongoRepository;
-    private final ModelMapper modelMapper;
+    private final RepositoryAdapter<Dog, DogEntity, Long> dogJpaRepository;
+    private final RepositoryAdapter<Dog, DogNode, Long> dogNeo4jRepository;
+    private final RepositoryAdapter<Dog, DogMongo, String> dogMongoRepository; //TODO: ALl dogs must use the same ID (change to GUID or UUID for all)
 
-    public Dog getDog(int id) {
-        return dogRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("dog with id " + id + " not found"));
+
+    public DogService(DogJpaRepository dogJpaRepository, DogNeo4jRepository dogNeo4jRepository, DogMongoRepository dogMongoRepository, ModelMapper modelMapper) {
+        this.dogJpaRepository = new RepositoryAdapterImpl<>(dogJpaRepository, modelMapper, Dog.class, DogEntity.class);
+        this.dogNeo4jRepository = new RepositoryAdapterImpl<>(dogNeo4jRepository, modelMapper, Dog.class, DogNode.class);
+        this.dogMongoRepository = new RepositoryAdapterImpl<>(dogMongoRepository, modelMapper, Dog.class, DogMongo.class);
+
+    }
+
+    public Dog getDog(long id) {
+        return dogJpaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("dog with id " + id + " not found"));
     }
 
     @Transactional
-    public DogDto saveDogInAllDatabases(Dog dog) {
-        dogRepository.save(dog);
-        saveDogInMySQL(dog);
-        saveDogInNeo4j(dog);
-        saveDogInMongoDB(dog);
-        return modelMapper.map(dog, DogDto.class);
+    public Dog saveDog(Dog dog) {
+        var savedDog = dogJpaRepository.save(dog);
+        dogNeo4jRepository.save(dog);
+        dogMongoRepository.save(dog);
+        return savedDog;
     }
 
-    public Dog saveDogInMySQL(Dog dog) {
-        return dogRepository.save(dog);
+    @Transactional
+    public void deleteDog(Dog dog) {
+        dogJpaRepository.delete(dog);
+        dogMongoRepository.delete(dog);
+        dogNeo4jRepository.delete(dog);
     }
-
-    public void saveDogInMongoDB(Dog dog) {
-        DogMongo dogMongo = modelMapper.map(dog, DogMongo.class);
-        dogMongoRepository.save(dogMongo);
-    }
-
-    public void saveDogInNeo4j(Dog dog) {
-        DogNeo4j dogNeo4j = modelMapper.map(dog, DogNeo4j.class);
-        dogNeo4jRepository.save(dogNeo4j);
-    }
-
-    public void deleteDogFromMySQL(Dog dog) {
-        dogRepository.delete(dog);
-    }
-
-    public void deleteDogInNeo4j(Dog dog) {
-        DogNeo4j dogNeo4j = modelMapper.map(dog, DogNeo4j.class);
-        dogNeo4jRepository.delete(dogNeo4j);
-    }
-
-    
-
 }

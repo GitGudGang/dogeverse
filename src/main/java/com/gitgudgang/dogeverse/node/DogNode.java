@@ -1,4 +1,4 @@
-package com.gitgudgang.dogeverse.entity.neo4j;
+package com.gitgudgang.dogeverse.node;
 
 import org.springframework.data.neo4j.core.schema.Id;
 
@@ -19,7 +19,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Node("Dog")
-public class DogNeo4j {
+public class DogNode {
 
     @Id
     @GeneratedValue
@@ -28,8 +28,8 @@ public class DogNeo4j {
     private String breed;
 
     @Relationship(type = "HAS_ACHIEVEMENT", direction = Relationship.Direction.OUTGOING)
-    private List<AchievementNeo4j> achievements = new ArrayList<>();
+    private List<AchievementNode> achievements = new ArrayList<>();
     
     @Relationship(type = "HAS_STATS", direction = Relationship.Direction.OUTGOING)
-    private StatsNeo4j stats;
+    private StatsNode stats;
 }

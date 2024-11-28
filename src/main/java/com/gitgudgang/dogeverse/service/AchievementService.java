@@ -1,9 +1,7 @@
 package com.gitgudgang.dogeverse.service;
 
-import com.gitgudgang.dogeverse.entity.Achievement;
-import com.gitgudgang.dogeverse.entity.Dog;
-import com.gitgudgang.dogeverse.repository.neo4j.AchievementRepository;
-
+import com.gitgudgang.dogeverse.entity.AchievementEntity;
+import com.gitgudgang.dogeverse.repository.AchievementRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,31 +12,31 @@ public class AchievementService {
 
     private AchievementRepository repository;
 
-    public Achievement getAchievement(int id) {
+    public AchievementEntity getAchievement(int id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Achievement with id " + id + " not found"));
     }
 
-    public Achievement updateSuccesses(int id, int successes)
+    public AchievementEntity updateSuccesses(int id, int successes)
     {
 
-       Achievement achievement = repository.findById(id).get();
-       achievement.setSuccesses(successes);
-        repository.save(achievement);
-        return achievement;
+       AchievementEntity achievementEntity = repository.findById(id).get();
+       achievementEntity.setSuccesses(successes);
+        repository.save(achievementEntity);
+        return achievementEntity;
     }
 
     public String checkAchievementStatus(int id)
     {
-        Achievement achievement = repository.findById(id).get();
+        AchievementEntity achievementEntity = repository.findById(id).get();
         int currentSuccesses = repository.findById(id).get().getSuccesses();
 
-        if(currentSuccesses >= achievement.getBasic() && currentSuccesses < achievement.getIntermediate()) 
+        if(currentSuccesses >= achievementEntity.getBasic() && currentSuccesses < achievementEntity.getIntermediate())
         {
             return "Porch Stinker";
-        } else if(currentSuccesses >= achievement.getIntermediate() && currentSuccesses < achievement.getAdvanced())
+        } else if(currentSuccesses >= achievementEntity.getIntermediate() && currentSuccesses < achievementEntity.getAdvanced())
         {
             return "Master Pooper";
-        } else if(currentSuccesses >= achievement.getAdvanced())
+        } else if(currentSuccesses >= achievementEntity.getAdvanced())
         {
             return "Life Destroyer";
         }
@@ -48,9 +46,9 @@ public class AchievementService {
 
     public void awardAchievement(String achievementName)
     {
-        Achievement achievement = new Achievement();
-        achievement.setName(achievementName);
-        repository.save(achievement);
+        AchievementEntity achievementEntity = new AchievementEntity();
+        achievementEntity.setName(achievementName);
+        repository.save(achievementEntity);
     }
     
 }
