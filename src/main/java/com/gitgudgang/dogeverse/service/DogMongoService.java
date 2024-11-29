@@ -1,7 +1,7 @@
 package com.gitgudgang.dogeverse.service;
 
+import com.gitgudgang.dogeverse.document.DogDocument;
 import com.gitgudgang.dogeverse.dto.DogDto;
-import com.gitgudgang.dogeverse.document.DogMongo;
 import com.gitgudgang.dogeverse.repository.DogMongoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
@@ -18,15 +18,15 @@ public class DogMongoService {
     private final DogMongoRepository dogMongoRepository;
 
     public DogDto getDogByName(String name) {
-        DogMongo dogMongo = dogMongoRepository.findDogByName(name);
-        if (dogMongo == null) throw new EntityNotFoundException("Dog not found");
-        return modelMapper.map(dogMongo, DogDto.class);
+        DogDocument dogDocument = dogMongoRepository.findDogByName(name);
+        if (dogDocument == null) throw new EntityNotFoundException("DogDocument not found");
+        return modelMapper.map(dogDocument, DogDto.class);
     }
 
     public List<DogDto> getAllDogsByBreed(String breed) {
-        List<DogMongo> dogsMongo = dogMongoRepository.findAllByBreed(breed);
+        List<DogDocument> dogsMongo = dogMongoRepository.findAllByBreed(breed);
         return dogsMongo.stream()
-            .map(dogMongo -> modelMapper.map(dogMongo, DogDto.class))
+            .map(dogDocument -> modelMapper.map(dogDocument, DogDto.class))
             .collect(Collectors.toList());
     }
 }

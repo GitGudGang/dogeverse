@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -19,7 +21,7 @@ public class TrainerNode {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private UUID id;
     private String name;
     
     @Relationship(type = "HAS_STATS", direction = Relationship.Direction.OUTGOING)

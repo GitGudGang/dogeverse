@@ -3,6 +3,8 @@ package com.gitgudgang.dogeverse.domain.builder;
 import com.gitgudgang.dogeverse.entity.AchievementEntity;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @NoArgsConstructor
 public class AchievementBuilder {
     
@@ -30,6 +32,7 @@ public class AchievementBuilder {
 
     public AchievementEntity build() {
         var temp = achievement;
+        temp.setId(UUID.randomUUID());
         achievement = null;
         return temp;
     }

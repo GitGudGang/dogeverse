@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/dogs")
 @AllArgsConstructor
@@ -25,7 +27,7 @@ public class DogController {
     private final ModelMapper modelMapper;
 
     @GetMapping("/{id}")
-    public DogDto getDog(@PathVariable long id) {
+    public DogDto getDog(@PathVariable UUID id) {
         return modelMapper.map(dogService.getDog(id), DogDto.class);
     }
 

@@ -2,6 +2,8 @@ package com.gitgudgang.dogeverse.dto;
 
 import lombok.*;
 
+import java.util.UUID;
+
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
@@ -10,7 +12,7 @@ import lombok.*;
 public class AchievementDto {
 
 
-    private int id;
+    private UUID id;
     private String name;
     private int successes;
     // private final int basic = 50;

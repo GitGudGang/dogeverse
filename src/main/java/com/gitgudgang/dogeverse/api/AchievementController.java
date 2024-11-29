@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/achievements")
@@ -20,18 +22,19 @@ public class AchievementController {
     private ModelMapper modelMapper;
 
     @GetMapping("/{id}")
-    Achievement getAchievement(@PathVariable int id) {
-         return achievementService.getAchievement(id);
+    AchievementDto getAchievement(@PathVariable UUID id) {
+         achievementService.getAchievement(id);
+         return modelMapper.map(achievementService.getAchievement(id), AchievementDto.class);
     }
 
     @PostMapping("/success/{id}/{successes}")
-    AchievementDto updateAchievement(@PathVariable int id, @PathVariable int successes) {
+    AchievementDto updateAchievement(@PathVariable UUID id, @PathVariable int successes) {
          AchievementEntity achievementEntity = achievementService.updateSuccesses(id, successes);
          return modelMapper.map(achievementEntity, AchievementDto.class);
     }
 
     @GetMapping("/checkAchievements/{id}")
-    String checkAchievement(@PathVariable int id) {
+    String checkAchievement(@PathVariable UUID id) {
      String achievementNameOrNull = achievementService.checkAchievementStatus(id);
          return achievementNameOrNull;
     }

@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
+
+import java.util.UUID;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -14,8 +17,7 @@ import org.hibernate.validator.constraints.Range;
 @Entity
 public class StatEntity {
     @Id
-    @GeneratedValue
-    private Long id;
+    private UUID id;
 
     @Enumerated(EnumType.STRING)
     private StatType statType;
