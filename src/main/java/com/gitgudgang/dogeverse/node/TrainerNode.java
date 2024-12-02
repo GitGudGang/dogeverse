@@ -1,5 +1,6 @@
 package com.gitgudgang.dogeverse.node;
 
+
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
@@ -10,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -20,10 +22,9 @@ import java.util.UUID;
 public class TrainerNode {
 
     @Id
-    @GeneratedValue
     private UUID id;
     private String name;
-    
+
     @Relationship(type = "HAS_STATS", direction = Relationship.Direction.OUTGOING)
-    private StatsNode stats;
+    private Set<StatNode> stats;
 }

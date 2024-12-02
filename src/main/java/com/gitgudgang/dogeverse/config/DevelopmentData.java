@@ -2,7 +2,6 @@ package com.gitgudgang.dogeverse.config;
 
 import com.gitgudgang.dogeverse.domain.Dog;
 import com.gitgudgang.dogeverse.entity.AchievementEntity;
-import com.gitgudgang.dogeverse.entity.DogEntity;
 import com.gitgudgang.dogeverse.domain.builder.AchievementBuilder;
 import com.gitgudgang.dogeverse.domain.builder.DogBuilder;
 import com.gitgudgang.dogeverse.repository.AchievementRepository;
@@ -28,12 +27,16 @@ public class DevelopmentData implements ApplicationRunner {
 
     private void generateAndInsertDogs(int n) {
         IntStream.range(0, n)
-                .mapToObj(i -> generateFakeDog())
+                .mapToObj(_ -> generateDog())
                 .forEach(dogService::saveDog);
     }
 
-    private Dog generateFakeDog() {
-        return DogBuilder.create().withName(faker.dog().name()).withBreed(faker.dog().breed()).build();
+    private Dog generateDog() {
+        return DogBuilder.create()
+                .withName(faker.dog().name())
+                .withBreed(faker.dog().breed())
+                .withStats()
+                .build();
     }
 
     private void generateAndInsertAchievements() {

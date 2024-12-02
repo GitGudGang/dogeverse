@@ -1,6 +1,9 @@
 package com.gitgudgang.dogeverse.domain;
 
+import java.util.UUID;
+
 public class Achievement {
+    private UUID id;
     private String name;
     private int successes;
     private final int basic = 50;

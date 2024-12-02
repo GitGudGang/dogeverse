@@ -1,8 +1,13 @@
 package com.gitgudgang.dogeverse.domain.builder;
 
 import com.gitgudgang.dogeverse.domain.Dog;
+import com.gitgudgang.dogeverse.domain.Stat;
+import com.gitgudgang.dogeverse.domain.StatType;
 import com.gitgudgang.dogeverse.entity.DogEntity;
 import lombok.NoArgsConstructor;
+
+import java.util.Random;
+import java.util.Set;
 
 @NoArgsConstructor
 public class DogBuilder {
@@ -26,6 +31,11 @@ public class DogBuilder {
 
     public DogBuilder withBreed(String breed) {
         this.dog.setBreed(breed);
+        return this;
+    }
+
+    public DogBuilder withStats() {
+        this.dog.setStats(StatFactory.createStats());
         return this;
     }
 
