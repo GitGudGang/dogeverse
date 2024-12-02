@@ -1,6 +1,5 @@
 package com.gitgudgang.dogeverse.domain;
 
-import com.gitgudgang.dogeverse.entity.CharacterEntity;
 import lombok.Getter;
 import lombok.Setter;
 
