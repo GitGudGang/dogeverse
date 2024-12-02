@@ -1,8 +1,8 @@
 package com.gitgudgang.dogeverse.node;
 
+
 import org.springframework.data.neo4j.core.schema.Node;
 
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,12 +15,10 @@ import java.util.UUID;
 @NoArgsConstructor
 @Setter
 @Getter
-@Node("Stats")
-public class StatsNode {
+@Node("Stat")
+public class StatNode {
     @Id
-    @GeneratedValue
     private UUID id;
-    private String strength;
-    private int dexterity;
-    private int intelligence;
+    private StatType statType;
+    private int statValue;
 }

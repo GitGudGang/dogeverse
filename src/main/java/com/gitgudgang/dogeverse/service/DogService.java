@@ -37,6 +37,7 @@ public class DogService {
     @Transactional
     public Dog saveDog(Dog dog) {
         dog.setId(UUID.randomUUID());
+        //TODO: Add dog stats
         dogJpaRepository.save(dog);
         dogNeo4jRepository.save(dog);
         dogMongoRepository.save(dog);

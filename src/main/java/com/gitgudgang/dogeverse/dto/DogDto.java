@@ -1,7 +1,9 @@
 package com.gitgudgang.dogeverse.dto;
 
+import com.gitgudgang.dogeverse.domain.Stat;
 import lombok.*;
 
+import java.util.Set;
 import java.util.UUID;
 
 @EqualsAndHashCode
@@ -13,4 +15,8 @@ public class DogDto {
     private UUID id;
 
     private String name;
+
+    private String breed;
+
+    private Set<Stat> stats;
 }

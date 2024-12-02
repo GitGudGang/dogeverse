@@ -12,6 +12,8 @@ import java.util.UUID;
 @EqualsAndHashCode
 public abstract class Character {
     private UUID id;
+
     private String name;
+
     private Set<Stat> stats;
 }
