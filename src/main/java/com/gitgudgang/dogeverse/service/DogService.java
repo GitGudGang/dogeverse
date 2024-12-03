@@ -7,7 +7,6 @@ import com.gitgudgang.dogeverse.entity.DogEntity;
 import com.gitgudgang.dogeverse.exception.DogNotFoundException;
 import com.gitgudgang.dogeverse.node.DogNode;
 import com.gitgudgang.dogeverse.repository.*;
-import jakarta.persistence.EntityNotFoundException;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
