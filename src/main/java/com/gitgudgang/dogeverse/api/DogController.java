@@ -8,13 +8,7 @@ import lombok.AllArgsConstructor;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -31,10 +25,34 @@ public class DogController {
         return modelMapper.map(dogService.getDog(id), DogDto.class);
     }
 
-    @PostMapping("/")
+    @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public DogDto createDog(@RequestBody DogDto dogDto) {
-        var dog = modelMapper.map(dogDto, Dog.class);
-        return modelMapper.map(dogService.saveDog(dog), DogDto.class);
+        var savedDog = dogService.saveDog(dtoToDog(dogDto));
+        return dogToDto(savedDog);
+    }
+
+    @PutMapping("/{id}/edit")
+    DogDto editDog(@PathVariable UUID id, @RequestBody DogDto dogDto) {
+       var editedDog = dogService.editDog(id, dtoToDog(dogDto));
+       return dogToDto(editedDog);
+    }
+
+    @DeleteMapping("/{id}/delete")
+    void deleteDog(@PathVariable UUID id) {
+        dogService.deleteDogById(id);
+    }
+
+    @DeleteMapping("/delete")
+    void deleteDog(@RequestBody DogDto dogDto) {
+        dogService.deleteDog(dtoToDog(dogDto));
+    }
+
+    private Dog dtoToDog(DogDto dto) {
+        return modelMapper.map(dto, Dog.class);
+    }
+
+    private DogDto dogToDto(Dog dog) {
+        return modelMapper.map(dog, DogDto.class);
     }
 }

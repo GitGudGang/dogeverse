@@ -1,9 +1,6 @@
 package com.gitgudgang.dogeverse.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Set;
 import java.util.UUID;
@@ -12,8 +9,11 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public abstract class Character {
     private UUID id;
+
     private String name;
+
     private Set<Stat> stats;
 }

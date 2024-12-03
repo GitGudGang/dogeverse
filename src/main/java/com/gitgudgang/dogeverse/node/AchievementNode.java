@@ -18,8 +18,9 @@ import java.util.UUID;
 @Node("Achievement")
 public class AchievementNode {
     @Id
-    @GeneratedValue
     private UUID id;
+
     private String name;
+
     private int successes;
 }
