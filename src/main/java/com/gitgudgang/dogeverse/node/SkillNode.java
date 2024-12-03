@@ -18,8 +18,9 @@ import java.util.UUID;
 @Node("Skill")
 public class SkillNode {
     @Id
-    @GeneratedValue
     private UUID id;
+
     private String name;
+
     private String description;
 }

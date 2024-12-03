@@ -1,9 +1,11 @@
 package com.gitgudgang.dogeverse.node;
 
+import com.gitgudgang.dogeverse.domain.Stat;
 import org.springframework.data.neo4j.core.schema.Id;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
@@ -32,5 +34,5 @@ public class DogNode {
     private List<AchievementNode> achievements = new ArrayList<>();
     
     @Relationship(type = "HAS_STATS", direction = Relationship.Direction.OUTGOING)
-    private StatsNode stats;
+    private Set<StatNode> stats;
 }

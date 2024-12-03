@@ -13,6 +13,5 @@ public class DogEntity extends CharacterEntity {
     private String breed;
 
     @ManyToOne
-    //@JoinColumn(name = "trainer_id", nullable = false)
     private TrainerEntity trainer;
 }

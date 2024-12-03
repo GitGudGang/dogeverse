@@ -24,7 +24,6 @@ public abstract class CharacterEntity {
 
     // Character has 3 stats: str, dex and int here
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "character_id")
     private Set<StatEntity> stats = new HashSet<>();
 
 }
