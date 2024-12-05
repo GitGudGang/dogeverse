@@ -9,7 +9,7 @@ import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@EnableNeo4jRepositories(basePackages = "com.gitgudgang.dogeverse.repository.neo4j")
+@EnableNeo4jRepositories(basePackages = "com.gitgudgang.dogeverse.repository")
 public class Neo4jConfig {
 
     @Bean(name = "neo4jTransactionManager")
