@@ -1,8 +1,10 @@
 package com.gitgudgang.dogeverse.api;
 
 import java.util.List;
+import java.util.UUID;
 
-import org.springframework.http.ResponseEntity;
+import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,50 +12,59 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gitgudgang.dogeverse.domain.Trainer;
 import com.gitgudgang.dogeverse.dto.TrainerDto;
 import com.gitgudgang.dogeverse.service.TrainerService;
 
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 @RestController
-@RequestMapping("/api/trainer")
+@RequestMapping("/api/trainers")
+@AllArgsConstructor
 public class TrainerController {
-    
-    private final TrainerService trainerService;
 
-    @PostMapping
-    public ResponseEntity<TrainerDto> createTrainer(@RequestBody TrainerDto trainerDto) {
-        TrainerDto createdTrainer = trainerService.createTrainer(trainerDto);
-        return ResponseEntity.ok(createdTrainer);
+    private final TrainerService trainerService;
+    private final ModelMapper modelMapper;
+
+    @GetMapping("/{id}")
+    public TrainerDto getTrainer(@PathVariable UUID id) {
+        return modelMapper.map(trainerService.getTrainer(id), TrainerDto.class);
     }
 
     @GetMapping
-    public ResponseEntity<List<TrainerDto>> getAllTrainers() {
-        List<TrainerDto> trainers = trainerService.getAllTrainers();
-        return ResponseEntity.ok(trainers);
+    public List<TrainerDto> getAllTrainers() {
+        return trainerService.getAllTrainers()
+                             .stream()
+                             .map(trainer -> modelMapper.map(trainer, TrainerDto.class))
+                             .toList();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<TrainerDto> getTrainerById(@PathVariable String id) {
-        TrainerDto trainer = trainerService.getTrainerById(id);
-        return ResponseEntity.ok(trainer);
+    @PostMapping("/add")
+    @ResponseStatus(HttpStatus.CREATED)
+    public TrainerDto createTrainer(@RequestBody TrainerDto trainerDto) {
+        var savedTrainer = trainerService.saveTrainer(dtoToTrainer(trainerDto));
+        return trainerToDto(savedTrainer);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<TrainerDto> updateTrainer(
-        @PathVariable String id,
-        @RequestBody TrainerDto trainerDto
-    ) {
-        TrainerDto updatedTrainer = trainerService.updateTrainer(id, trainerDto);
-        return ResponseEntity.ok(updatedTrainer);
+    @PutMapping("/{id}/edit")
+    public TrainerDto editTrainer(@PathVariable UUID id, @RequestBody TrainerDto trainerDto) {
+        var updatedTrainer = trainerService.updateTrainer(id, dtoToTrainer(trainerDto));
+        return trainerToDto(updatedTrainer);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTrainer(@PathVariable String id) {
+    @DeleteMapping("/{id}/delete")
+    public void deleteTrainer(@PathVariable UUID id) {
         trainerService.deleteTrainer(id);
-        return ResponseEntity.noContent().build();
+    }
+
+    private Trainer dtoToTrainer(TrainerDto dto) {
+        return modelMapper.map(dto, Trainer.class);
+    }
+
+    private TrainerDto trainerToDto(Trainer trainer) {
+        return modelMapper.map(trainer, TrainerDto.class);
     }
 }
