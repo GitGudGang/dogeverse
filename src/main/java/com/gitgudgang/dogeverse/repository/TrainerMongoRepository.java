@@ -15,6 +15,6 @@ public interface TrainerMongoRepository extends MongoRepository<TrainerDocument,
     @Query("{name:'?0'}")
     TrainerDocument findTrainerByName(String name);
 
-    @Query(value="{experience:'?0'}")
-    List<TrainerDocument> findAllByExperience(int experience);
+ //   @Query(value="{experience:'?0'}")
+ //   List<TrainerDocument> findAllByExperience(int experience);
 }

@@ -15,6 +15,6 @@ public interface TrainerNeo4jRepository extends Neo4jRepository<TrainerNode, UUI
     @Query("MATCH (t:Trainer) RETURN t.name AS name")
     List<TrainerNode> getAllTrainerNames();
 
-    @Query("MATCH (t:Trainer) WHERE t.experience > $experience RETURN t")
-    List<TrainerNode> findTrainersByExperience(int experience);
+//    @Query("MATCH (t:Trainer) WHERE t.experience > $experience RETURN t")
+//    List<TrainerNode> findTrainersByExperience(int experience);
 }

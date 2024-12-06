@@ -8,7 +8,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.gitgudgang.dogeverse.domain.Stat;
-import com.gitgudgang.dogeverse.entity.DogEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,11 +20,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @Data
-@Document(collection = "trainers")
+@Document(collection = "Trainer")
 public class TrainerDocument {
   @Id
     private UUID id;
     private String name;
-    private Set<Stat> stats; 
-    private ArrayList<DogEntity> dogs;
+    private Set<Stat> stats; //TODO: Change to StatDocument
+    private ArrayList<DogDocument> dogs;
 }

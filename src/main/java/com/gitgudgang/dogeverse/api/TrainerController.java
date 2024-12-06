@@ -3,6 +3,8 @@ package com.gitgudgang.dogeverse.api;
 import java.util.List;
 import java.util.UUID;
 
+import com.gitgudgang.dogeverse.domain.Dog;
+import com.gitgudgang.dogeverse.dto.DogDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,7 +47,7 @@ public class TrainerController {
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public TrainerDto createTrainer(@RequestBody TrainerDto trainerDto) {
-        var savedTrainer = trainerService.saveTrainer(dtoToTrainer(trainerDto));
+        var savedTrainer = trainerService.createTrainer(dtoToTrainer(trainerDto));
         return trainerToDto(savedTrainer);
     }
 
@@ -58,6 +60,12 @@ public class TrainerController {
     @DeleteMapping("/{id}/delete")
     public void deleteTrainer(@PathVariable UUID id) {
         trainerService.deleteTrainer(id);
+    }
+
+    @PostMapping("/{id}/add-dog/new")
+    public TrainerDto addDogToTrainer(@PathVariable UUID id, @RequestBody DogDto dogDto) {
+        var updatedTrainer = trainerService.addDogToTrainer(id, modelMapper.map(dogDto, Dog.class));
+        return trainerToDto(updatedTrainer);
     }
 
     private Trainer dtoToTrainer(TrainerDto dto) {
