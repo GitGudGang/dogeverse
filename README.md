@@ -36,3 +36,44 @@ You need to implement 3 solutions:
 ➢Dump file of the document database and Script for loading the test data.  
 ➢Dump file of the graph database and Script for loading the test data.  
 ➢A brief installation guide that specifies how to organise the code and import the databases in a test environment with full operational capabilities.
+
+--------------------------------------
+
+### Databases for Developers - Exam
+The exam will be oral, externally censored, and graded according to the 7-grade scale:
+grading scale
+
+### The exam will take a maximum of 30 minutes per student:
+➢ Project presentation (PowerPoint presentation + demo): 10 min. The final project will be 
+developed in groups, but it will be presented individually. <br />
+➢ Questions by the examiner and the censor: 15 min <br />
+➢ Grading: 5min <br />
+
+### Each individual grade will be based on:
+➢ Quality of the final project <br />
+➢ Project report <br />
+➢ Performance at the exam (presentation + questions) <br />
+
+Students will bring their laptops to the exam. The documentation must be already open, and 
+the application and the database servers must be running before the exam starts - otherwise
+the time spent in opening/starting them will count as the exam time.
+To present the project and to answer examiner’s and censor’s questions, students will be free 
+to use whichever tool they consider appropriate.
+
+### The project presentation will consist of:
+➢ A demonstration of the CRUD application from a functional perspective (one can use 
+swagger, postman, etc.) <br />
+➢ A brief explanation of the relational database solution, including design and 
+implementation decisions. <br />
+➢ A brief explanation of the document database solution, including design and 
+implementation decisions. <br />
+➢ A brief explanation of the graph database solution, including design and implementation 
+decisions. <br />
+
+Examiner and censor can ask questions regarding any part of the project or the subject’s
+curriculum. They can also request the student to perform live coding (for example 
+create/update/execute SQL statements, stored procedures and functions, triggers, user 
+management, NoSQL queries etc.).
+
+Note: The external censor will mainly focus on the final report to make sure it fully covers the 
+final project requirements.

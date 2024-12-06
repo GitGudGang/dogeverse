@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/neo4j/dogs")
@@ -18,7 +19,7 @@ public class DogNeo4jController {
     private final DogNeo4jService dogNeo4jService;
 
     @GetMapping("/{id}")
-    public DogDto getDogById(Long id) {
+    public DogDto getDogById(UUID id) {
         return dogNeo4jService.getDogById(id);
     }
 

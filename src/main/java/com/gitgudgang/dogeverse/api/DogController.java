@@ -1,20 +1,16 @@
 package com.gitgudgang.dogeverse.api;
 
+import com.gitgudgang.dogeverse.domain.Dog;
 import com.gitgudgang.dogeverse.dto.DogDto;
-import com.gitgudgang.dogeverse.entity.Dog;
 import com.gitgudgang.dogeverse.service.DogService;
 
 import lombok.AllArgsConstructor;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/dogs")
@@ -25,14 +21,38 @@ public class DogController {
     private final ModelMapper modelMapper;
 
     @GetMapping("/{id}")
-    public DogDto getDog(@PathVariable int id) {
+    public DogDto getDog(@PathVariable UUID id) {
         return modelMapper.map(dogService.getDog(id), DogDto.class);
     }
 
-    @PostMapping("/")
+    @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public DogDto createDog(@RequestBody Dog dog) {
-        // Save the dog entity in MySQL, Neo4j, and MongoDB
-        return dogService.saveDogInAllDatabases(dog);
+    public DogDto createDog(@RequestBody DogDto dogDto) {
+        var savedDog = dogService.saveDog(dtoToDog(dogDto));
+        return dogToDto(savedDog);
+    }
+
+    @PutMapping("/{id}/edit")
+    DogDto editDog(@PathVariable UUID id, @RequestBody DogDto dogDto) {
+       var editedDog = dogService.editDog(id, dtoToDog(dogDto));
+       return dogToDto(editedDog);
+    }
+
+    @DeleteMapping("/{id}/delete")
+    void deleteDog(@PathVariable UUID id) {
+        dogService.deleteDogById(id);
+    }
+
+    @DeleteMapping("/delete")
+    void deleteDog(@RequestBody DogDto dogDto) {
+        dogService.deleteDog(dtoToDog(dogDto));
+    }
+
+    private Dog dtoToDog(DogDto dto) {
+        return modelMapper.map(dto, Dog.class);
+    }
+
+    private DogDto dogToDto(Dog dog) {
+        return modelMapper.map(dog, DogDto.class);
     }
 }
