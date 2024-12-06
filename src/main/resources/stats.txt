@@ -1,0 +1,104 @@
+{
+  "skills": [
+    {
+      "name": "chewShoe",
+      "StatType": "STRENGTH",
+      "description": "Vigorously gnawing on a shoe until it’s thoroughly destroyed."
+    },
+    {
+      "name": "biteAnkle",
+      "StatType": "STRENGTH",
+      "description": "A quick, low-to-the-ground nip to slow down or frustrate someone."
+    },
+    {
+      "name": "fetchStick",
+      "StatType": "DEXTERITY",
+      "description": "Racing off to retrieve a thrown stick and returning it with precision."
+    },
+    {
+      "name": "poopInHouse",
+      "StatType": "INTELLIGENCE",
+      "description": "Strategically leaving a messy surprise indoors, often out of spite or confusion."
+    },
+    {
+      "name": "barkAtShadow",
+      "StatType": "INTELLIGENCE",
+      "description": "Mistaking shadows for threats and alerting the pack with loud barks."
+    },
+    {
+      "name": "barkAtNeighbour",
+      "StatType": "STRENGTH",
+      "description": "Alerting everyone by loudly announcing the presence of the neighbor."
+    },
+    {
+      "name": "jumpTheFence",
+      "StatType": "DEXTERITY",
+      "description": "Leaping gracefully over the backyard barrier in pursuit of adventure."
+    },
+    {
+      "name": "rollOver",
+      "StatType": "DEXTERITY",
+      "description": "A classic obedience trick: flipping onto the back and completing a full roll."
+    },
+    {
+      "name": "playDead",
+      "StatType": "INTELLIGENCE",
+      "description": "Feigning lifelessness to confuse or amuse onlookers."
+    },
+    {
+      "name": "sit",
+      "StatType": "INTELLIGENCE",
+      "description": "Assuming a seated position on command, a basic obedience skill."
+    },
+    {
+      "name": "stay",
+      "StatType": "INTELLIGENCE",
+      "description": "Remaining perfectly still, no matter the distractions."
+    },
+    {
+      "name": "stealBagel",
+      "StatType": "DEXTERITY",
+      "description": "Silently snatching a bagel off the counter before anyone notices."
+    },
+    {
+      "name": "eatIphoneCharger",
+      "StatType": "STRENGTH",
+      "description": "Chewing through a phone charger cable with determined jaw power."
+    },
+    {
+      "name": "unrollToiletPaper",
+      "StatType": "INTELLIGENCE",
+      "description": "Methodically pawing at the toilet paper roll until it’s strewn all over."
+    },
+    {
+      "name": "digUpGarden",
+      "StatType": "STRENGTH",
+      "description": "Clawing and snouting through flower beds to create chaotic craters."
+    },
+    {
+      "name": "scatterLaundry",
+      "StatType": "DEXTERITY",
+      "description": "Grabbing clothes from the laundry basket and distributing them around the house."
+    },
+    {
+      "name": "stealRemote",
+      "StatType": "DEXTERITY",
+      "description": "Sneaking onto the couch and quietly making off with the TV remote."
+    },
+    {
+      "name": "shredCouchCushion",
+      "StatType": "STRENGTH",
+      "description": "Ripping into sofa cushions and turning them into fluffy confetti."
+    },
+    {
+      "name": "knockOverTrashCan",
+      "StatType": "STRENGTH",
+      "description": "Toppling the garbage can to rummage through its delightful contents."
+    },
+    {
+      "name": "howlAt2AM",
+      "StatType": "INTELLIGENCE",
+      "description": "A calculated nighttime performance to rouse the entire household."
+    }
+  ]
+}

@@ -16,7 +16,9 @@ public class Skill {
 
     private String name;
 
-    private int baseValue; //TODO: This baseValue
+    private StatType statType;
+
+    private int baseValue; //TODO: baseValue is the associated stat of the dog
 
     private int totalValue; //TODO: For each 10 successes, totalValue goes up by 1
 
