@@ -1,7 +1,11 @@
 package com.gitgudgang.dogeverse.domain.builder;
 
+import com.gitgudgang.dogeverse.domain.Dog;
 import com.gitgudgang.dogeverse.domain.Trainer;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 public class TrainerBuilder {
@@ -25,6 +29,15 @@ public class TrainerBuilder {
 
     public TrainerBuilder withStats() {
         this.trainer.setStats(StatFactory.createStats());
+        return this;
+    }
+
+    public TrainerBuilder withDogs(List<Dog> dogs) {
+        // Bidirectional relationship has to be saved manually
+        this.trainer.setDogs(dogs);
+
+        dogs.forEach(dog -> dog.setTrainer(this.trainer));
+
         return this;
     }
 

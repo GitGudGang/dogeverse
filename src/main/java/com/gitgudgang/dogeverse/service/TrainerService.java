@@ -5,6 +5,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import com.gitgudgang.dogeverse.domain.Dog;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,30 +28,36 @@ public class TrainerService {
     private final RepositoryAdapter<Trainer, TrainerEntity, UUID> trainerJpaRepository;
     private final RepositoryAdapter<Trainer, TrainerNode, UUID> trainerNeo4jRepository;
     private final RepositoryAdapter<Trainer, TrainerDocument, UUID> trainerMongoRepository;
+    private final DogService dogService;
 
     public TrainerService(
             TrainerJpaRepository trainerJpaRepository,
             TrainerNeo4jRepository trainerNeo4jRepository,
             TrainerMongoRepository trainerMongoRepository,
-            ModelMapper modelMapper
+            ModelMapper modelMapper, DogService dogService
     ) {
         this.trainerJpaRepository = new RepositoryAdapterImpl<>(trainerJpaRepository, modelMapper, Trainer.class, TrainerEntity.class);
         this.trainerNeo4jRepository = new RepositoryAdapterImpl<>(trainerNeo4jRepository, modelMapper, Trainer.class, TrainerNode.class);
         this.trainerMongoRepository = new RepositoryAdapterImpl<>(trainerMongoRepository, modelMapper, Trainer.class, TrainerDocument.class);
+        this.dogService = dogService;
     }
 
     public Trainer getTrainer(UUID id) {
         return trainerJpaRepository.findById(id).orElseThrow(() -> new TrainerNotFoundException(id, DatabaseType.MYSQL));
     }
 
- public List<Trainer> getAllTrainers() {
-    return StreamSupport.stream(trainerJpaRepository.findAll().spliterator(), false)
-                        .collect(Collectors.toList());
-}
+     public List<Trainer> getAllTrainers() {
+        return StreamSupport.stream(trainerJpaRepository.findAll().spliterator(), false)
+                            .collect(Collectors.toList());
+    }
 
     @Transactional
-    public Trainer saveTrainer(Trainer trainer) {
+    public Trainer createTrainer(Trainer trainer) {
         trainer.setId(UUID.randomUUID());
+        return saveTrainer(trainer);
+    }
+
+    private Trainer saveTrainer(Trainer trainer) {
         trainerJpaRepository.save(trainer);
         trainerNeo4jRepository.save(trainer);
         trainerMongoRepository.save(trainer);
@@ -59,18 +66,13 @@ public class TrainerService {
 
     @Transactional
     public Trainer updateTrainer(UUID id, Trainer trainer) {
-        var existingTrainer = trainerJpaRepository.findById(id).orElseThrow(() -> new TrainerNotFoundException(id, DatabaseType.MYSQL));
-        if (!existingTrainer.equals(trainer)) {
-            trainerJpaRepository.save(trainer);
-        }
-        existingTrainer = trainerNeo4jRepository.findById(id).orElseThrow(() -> new TrainerNotFoundException(id, DatabaseType.NEO4J));
-        if (!existingTrainer.equals(trainer)) {
-            trainerNeo4jRepository.save(trainer);
-        }
-        existingTrainer = trainerMongoRepository.findById(id).orElseThrow(() -> new TrainerNotFoundException(id, DatabaseType.MONGODB));
-        if (!existingTrainer.equals(trainer)) {
-            trainerMongoRepository.save(trainer);
-        }
+
+        trainerJpaRepository.findById(id).orElseThrow(() -> new TrainerNotFoundException(id, DatabaseType.MYSQL));
+        trainerNeo4jRepository.findById(id).orElseThrow(() -> new TrainerNotFoundException(id, DatabaseType.NEO4J));
+        trainerMongoRepository.findById(id).orElseThrow(() -> new TrainerNotFoundException(id, DatabaseType.MONGODB));
+
+        saveTrainer(trainer);
+
         return trainer;
     }
 
@@ -79,5 +81,13 @@ public class TrainerService {
         trainerJpaRepository.deleteById(id);
         trainerNeo4jRepository.deleteById(id);
         trainerMongoRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Trainer addDogToTrainer(UUID id, Dog dog) {
+        var trainer = getTrainer(id);
+        var savedDog = dogService.saveDog(dog);
+        trainer.getDogs().add(savedDog);
+        return saveTrainer(trainer);
     }
 }

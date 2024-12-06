@@ -27,7 +27,9 @@
     <logger name="org.springframework.web.filter" level="INFO"/>
 
     <logger name="org.hibernate" level="INFO"/>
-    <logger name="org.springframework.data" level="INFO"/>
+    <logger name="org.springframework.data" level="WARN"/>
+    <logger name="org.springframework.data.neo4j.cypher.deprecation" level="OFF"/>
+
 
     <!-- Set the root logger level and appender -->
     <root level="INFO">

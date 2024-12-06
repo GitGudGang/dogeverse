@@ -11,9 +11,9 @@ public class StatFactory {
 
     public static Set<Stat> createStats() {
         var rand = new Random();
-        var strength = new Stat(UUID.randomUUID(), StatType.STRENGTH, rand.nextInt(1, 11));
-        var dexterity = new Stat(UUID.randomUUID(), StatType.DEXTERITY, rand.nextInt(1, 11));
-        var intelligence = new Stat(UUID.randomUUID(), StatType.INTELLIGENCE, rand.nextInt(1, 11));
+        var strength = new Stat(UUID.randomUUID(), StatType.STRENGTH, rand.nextInt(1, 7));
+        var dexterity = new Stat(UUID.randomUUID(), StatType.DEXTERITY, rand.nextInt(1, 7));
+        var intelligence = new Stat(UUID.randomUUID(), StatType.INTELLIGENCE, rand.nextInt(1, 7));
         return Set.of(strength, dexterity, intelligence);
     }
 }

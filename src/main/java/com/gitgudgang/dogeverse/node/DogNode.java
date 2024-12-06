@@ -24,7 +24,6 @@ public class DogNode {
 
     @Id
     private UUID id;
-
     private String name;
     private String breed;
 
@@ -33,4 +32,7 @@ public class DogNode {
     
     @Relationship(type = "HAS_STATS", direction = Relationship.Direction.OUTGOING)
     private Set<StatNode> stats;
+
+    @Relationship(type = "HAS_TRAINER", direction = Relationship.Direction.OUTGOING)
+    private TrainerNode trainer;
 }
