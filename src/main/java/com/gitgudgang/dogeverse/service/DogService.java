@@ -7,7 +7,6 @@ import com.gitgudgang.dogeverse.entity.DogEntity;
 import com.gitgudgang.dogeverse.exception.DogNotFoundException;
 import com.gitgudgang.dogeverse.node.DogNode;
 import com.gitgudgang.dogeverse.repository.*;
-import jakarta.persistence.EntityNotFoundException;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,6 @@ public class DogService {
         this.dogJpaRepository = new RepositoryAdapterImpl<>(dogJpaRepository, modelMapper, Dog.class, DogEntity.class);
         this.dogNeo4jRepository = new RepositoryAdapterImpl<>(dogNeo4jRepository, modelMapper, Dog.class, DogNode.class);
         this.dogMongoRepository = new RepositoryAdapterImpl<>(dogMongoRepository, modelMapper, Dog.class, DogDocument.class);
-
     }
 
     public Dog getDog(UUID id) {
@@ -37,7 +35,6 @@ public class DogService {
     @Transactional
     public Dog saveDog(Dog dog) {
         dog.setId(UUID.randomUUID());
-        //TODO: Add dog stats
         dogJpaRepository.save(dog);
         dogNeo4jRepository.save(dog);
         dogMongoRepository.save(dog);

@@ -1,6 +1,5 @@
 package com.gitgudgang.dogeverse.node;
 
-import com.gitgudgang.dogeverse.domain.Stat;
 import org.springframework.data.neo4j.core.schema.Id;
 
 import java.util.ArrayList;

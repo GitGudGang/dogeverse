@@ -16,8 +16,9 @@ public class Skill {
 
     private String name;
 
-    private int baseValue;
+    private int baseValue; //TODO: This baseValue
 
-    private int totalValue;
+    private int totalValue; //TODO: For each 10 successes, totalValue goes up by 1
 
+    private int successes;
 }
