@@ -1,11 +1,14 @@
 package com.gitgudgang.dogeverse.config;
 
 import com.gitgudgang.dogeverse.domain.Dog;
+import com.gitgudgang.dogeverse.domain.Trainer;
+import com.gitgudgang.dogeverse.domain.builder.TrainerBuilder;
 import com.gitgudgang.dogeverse.entity.AchievementEntity;
 import com.gitgudgang.dogeverse.domain.builder.AchievementBuilder;
 import com.gitgudgang.dogeverse.domain.builder.DogBuilder;
 import com.gitgudgang.dogeverse.repository.AchievementRepository;
 import com.gitgudgang.dogeverse.service.DogService;
+import com.gitgudgang.dogeverse.service.TrainerService;
 import com.github.javafaker.Faker;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +27,7 @@ public class DevelopmentData implements ApplicationRunner {
     private final Faker faker;
     private final DogService dogService;
     private final AchievementRepository achievementRepository;
+    private final TrainerService trainerService;
 
     private void generateAndInsertDogs(int n) {
         IntStream.range(0, n)
@@ -51,10 +55,26 @@ public class DevelopmentData implements ApplicationRunner {
     }
 
 
+    private void generateAdnInsertTrainers(int n) {
+        IntStream.range(0, n)
+                .mapToObj(_ -> generateTrainer())
+                .forEach(trainerService::saveTrainer);
+    }
+
+    private Trainer generateTrainer() {
+        return TrainerBuilder.create()
+                .withName(faker.name().firstName())
+                .withStats()
+                .build();
+    }
+
+
     @Override
     public void run(ApplicationArguments args) {
         generateAndInsertDogs(10);
         log.info("Dogs generated");
         generateAndInsertAchievements();
+        generateAdnInsertTrainers(10);
+        log.info("Trainers generated");
     }
 }
