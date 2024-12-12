@@ -1,21 +1,24 @@
 package com.gitgudgang.dogeverse.domain;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-public class Dog extends Character {
+public class SkillBaseData {
 
-    private String breed;
+    private UUID id;
 
-    private Trainer trainer;
+    private String name;
 
-    private List<Skill> skills;
+    private StatType statType;
+
+    private String description;
 }

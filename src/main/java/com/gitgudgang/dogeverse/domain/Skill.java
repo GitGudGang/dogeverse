@@ -14,9 +14,7 @@ import java.util.UUID;
 public class Skill {
     private UUID id;
 
-    private String name;
-
-    private StatType statType;
+    private SkillBaseData skillBaseData;
 
     private int baseValue; //TODO: baseValue is the associated stat of the dog
 

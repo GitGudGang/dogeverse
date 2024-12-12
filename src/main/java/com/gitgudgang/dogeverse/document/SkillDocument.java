@@ -1,32 +1,27 @@
-package com.gitgudgang.dogeverse.entity;
+package com.gitgudgang.dogeverse.document;
 
 import com.gitgudgang.dogeverse.domain.StatType;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Range;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
 
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
-@Getter
-@Entity
-public class SkillEntity {
+@Document("Skill")
+public class SkillDocument {
     @Id
     private UUID id;
-
     private String name;
-
-    @Enumerated(EnumType.STRING)
     private StatType statType;
-
-    @Range(min = 1, max = 10)
+    private String description;
     private int baseValue;
-
-    @Range(min = 1, max = 20)
     private int totalValue;
+    private int successes;
 }

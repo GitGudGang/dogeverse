@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.neo4j.core.schema.Relationship;
 
 import java.util.UUID;
 
@@ -22,5 +23,10 @@ public class SkillNode {
 
     private String name;
 
+    private StatType statType;
+
     private String description;
+
+    @Relationship(type = "HAS_SKILL", direction = Relationship.Direction.INCOMING)
+    private DogNode dog;
 }
