@@ -23,9 +23,9 @@ import com.gitgudgang.dogeverse.service.TrainerService;
 
 import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/trainers")
-@AllArgsConstructor
 public class TrainerController {
 
     private final TrainerService trainerService;
