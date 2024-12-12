@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class SkillBaseDataService {
@@ -32,8 +34,10 @@ public class SkillBaseDataService {
         return skillBaseDataJpaRepository.save(skillBaseData);
     }
 
-    public Iterable<SkillBaseData> saveAllSkillBaseData(Iterable<SkillBaseData> skillBaseDataCol) {
-        skillBaseDataCol.forEach(skill -> skill.setId(UUID.randomUUID()));
-        return skillBaseDataJpaRepository.saveAll(skillBaseDataCol);
+    public Set<SkillBaseData> saveAllSkillBaseData(Iterable<SkillBaseData> skillBaseDatas) {
+        skillBaseDatas.forEach(skill -> skill.setId(UUID.randomUUID()));
+        var saved = skillBaseDataJpaRepository.saveAll(skillBaseDatas);
+        return StreamSupport.stream(saved.spliterator(), false)
+                .collect(Collectors.toSet());
     }
 }
