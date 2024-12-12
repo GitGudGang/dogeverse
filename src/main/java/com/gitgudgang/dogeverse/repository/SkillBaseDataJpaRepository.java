@@ -1,13 +1,11 @@
 package com.gitgudgang.dogeverse.repository;
 
+import com.gitgudgang.dogeverse.entity.SkillBaseDataEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
-import com.gitgudgang.dogeverse.entity.StatEntity;
 
 import java.util.UUID;
 
 @Repository
-public interface StatRepository extends CrudRepository<StatEntity, UUID>{
-    
+public interface SkillBaseDataJpaRepository extends CrudRepository<SkillBaseDataEntity, UUID> {
 }

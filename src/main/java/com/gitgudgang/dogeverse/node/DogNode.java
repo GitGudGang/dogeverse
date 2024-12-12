@@ -35,4 +35,7 @@ public class DogNode {
 
     @Relationship(type = "HAS_TRAINER", direction = Relationship.Direction.OUTGOING)
     private TrainerNode trainer;
+
+    @Relationship(type = "HAS_SKILL", direction = Relationship.Direction.OUTGOING)
+    private SkillNode skill;
 }
