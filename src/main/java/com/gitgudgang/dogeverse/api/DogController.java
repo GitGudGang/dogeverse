@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/dogs")
-@AllArgsConstructor
 public class DogController {
 
     private final DogService dogService;

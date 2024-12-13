@@ -10,7 +10,10 @@ import com.gitgudgang.dogeverse.repository.RepositoryAdapterImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class DogSkillService {
@@ -18,6 +21,11 @@ public class DogSkillService {
 
     public DogSkillService(DogSkillJpaRepository dogSkillJpaRepository, ModelMapper modelMapper) {
         this.dogSkillJpaRepository = new RepositoryAdapterImpl<>(dogSkillJpaRepository, modelMapper, DogSkill.class, DogSkillEntity.class);
+    }
+
+    public List<DogSkill> getAllDogSkills() {
+        return StreamSupport.stream(dogSkillJpaRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
     }
 
     DogSkill createAndSaveDogSkill(Dog dog, SkillBaseData skillBaseData, int statValue) {
