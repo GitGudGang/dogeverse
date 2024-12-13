@@ -1,6 +1,5 @@
 package com.gitgudgang.dogeverse.document;
 
-import com.gitgudgang.dogeverse.domain.Skill;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;

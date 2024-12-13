@@ -3,6 +3,7 @@ package com.gitgudgang.dogeverse.service;
 import com.gitgudgang.dogeverse.document.DogDocument;
 import com.gitgudgang.dogeverse.domain.DatabaseType;
 import com.gitgudgang.dogeverse.domain.Dog;
+import com.gitgudgang.dogeverse.domain.DogSkill;
 import com.gitgudgang.dogeverse.entity.DogEntity;
 import com.gitgudgang.dogeverse.exception.DogNotFoundException;
 import com.gitgudgang.dogeverse.node.DogNode;
@@ -12,7 +13,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class DogService {
@@ -20,12 +24,21 @@ public class DogService {
     private final RepositoryAdapter<Dog, DogEntity, UUID> dogJpaRepository;
     private final RepositoryAdapter<Dog, DogNode, UUID> dogNeo4jRepository;
     private final RepositoryAdapter<Dog, DogDocument, UUID> dogMongoRepository;
+    private final SkillBaseDataService skillBaseDataService;
+    private final DogSkillService dogSkillService;
 
 
-    public DogService(DogJpaRepository dogJpaRepository, DogNeo4jRepository dogNeo4jRepository, DogMongoRepository dogMongoRepository, ModelMapper modelMapper) {
+    public DogService(DogJpaRepository dogJpaRepository, DogNeo4jRepository dogNeo4jRepository, DogMongoRepository dogMongoRepository, SkillBaseDataService skillBaseDataService, DogSkillService dogSkillService, ModelMapper modelMapper) {
         this.dogJpaRepository = new RepositoryAdapterImpl<>(dogJpaRepository, modelMapper, Dog.class, DogEntity.class);
         this.dogNeo4jRepository = new RepositoryAdapterImpl<>(dogNeo4jRepository, modelMapper, Dog.class, DogNode.class);
         this.dogMongoRepository = new RepositoryAdapterImpl<>(dogMongoRepository, modelMapper, Dog.class, DogDocument.class);
+        this.skillBaseDataService = skillBaseDataService;
+        this.dogSkillService = dogSkillService;
+    }
+
+    public List<Dog> getAllDogs() {
+        return StreamSupport.stream(dogJpaRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
     }
 
     public Dog getDog(UUID id) {
@@ -71,5 +84,25 @@ public class DogService {
             dogMongoRepository.save(dog);
         }
         return dog;
+    }
+
+    public DogSkill addSkillToDog(UUID id, UUID skillBaseDataId) {
+
+        var dog = dogJpaRepository.findById(id).orElseThrow(() -> new DogNotFoundException(id, DatabaseType.MYSQL));
+
+        var skillBaseData = skillBaseDataService.getSkillBaseData(skillBaseDataId);
+
+        var statType = skillBaseData.getStatType();
+        var statValue = 0;
+        var matchingStatOptional = dog.getStats().stream()
+                .filter(stat -> stat.getStatType().equals(statType))
+                .findFirst();
+        if (matchingStatOptional.isPresent()) {
+            statValue = matchingStatOptional.get().getStatValue();
+        } else {
+            throw new IllegalArgumentException("No Stat found for statType: " + statType);
+        }
+
+        return dogSkillService.createAndSaveDogSkill(dog, skillBaseData, statValue);
     }
 }

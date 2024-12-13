@@ -31,7 +31,7 @@ public class DogNode {
     private List<AchievementNode> achievements = new ArrayList<>();
     
     @Relationship(type = "HAS_STATS", direction = Relationship.Direction.OUTGOING)
-    private Set<StatNode> stats;
+    private List<StatNode> stats;
 
     @Relationship(type = "HAS_TRAINER", direction = Relationship.Direction.OUTGOING)
     private TrainerNode trainer;

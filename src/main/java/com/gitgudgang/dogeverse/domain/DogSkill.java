@@ -11,8 +11,10 @@ import java.util.UUID;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Skill {
+public class DogSkill {
     private UUID id;
+
+    private Dog dog;
 
     private SkillBaseData skillBaseData;
 

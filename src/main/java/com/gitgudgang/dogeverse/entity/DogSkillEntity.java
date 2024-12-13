@@ -1,7 +1,5 @@
 package com.gitgudgang.dogeverse.entity;
 
-import com.gitgudgang.dogeverse.domain.Dog;
-import com.gitgudgang.dogeverse.domain.Skill;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;

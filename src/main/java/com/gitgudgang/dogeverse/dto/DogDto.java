@@ -3,6 +3,7 @@ package com.gitgudgang.dogeverse.dto;
 import com.gitgudgang.dogeverse.domain.Stat;
 import lombok.*;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -18,5 +19,5 @@ public class DogDto {
 
     private String breed;
 
-    private Set<Stat> stats;
+    private List<Stat> stats;
 }

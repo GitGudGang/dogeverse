@@ -23,7 +23,7 @@ public class SkillBaseDataService {
     }
 
     public SkillBaseData getSkillBaseData(UUID id) {
-        return skillBaseDataJpaRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        return skillBaseDataJpaRepository.findById(id).orElseThrow(EntityNotFoundException::new); //TODO: Make specific exception
     }
 
     public Iterable<SkillBaseData> getAllSkillBaseData() {

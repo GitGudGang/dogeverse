@@ -1,6 +1,7 @@
 package com.gitgudgang.dogeverse.dto;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -28,5 +29,5 @@ public class TrainerDto {
 
     private ArrayList<Dog> dogs;
 
-    private Set<Stat> stats;
+    private List<Stat> stats;
 }

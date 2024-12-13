@@ -2,6 +2,7 @@ package com.gitgudgang.dogeverse.api;
 
 import com.gitgudgang.dogeverse.domain.Dog;
 import com.gitgudgang.dogeverse.dto.DogDto;
+import com.gitgudgang.dogeverse.dto.DogSkillDto;
 import com.gitgudgang.dogeverse.service.DogService;
 
 import lombok.AllArgsConstructor;
@@ -10,15 +11,24 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/dogs")
-@AllArgsConstructor
 public class DogController {
 
     private final DogService dogService;
     private final ModelMapper modelMapper;
+
+    @GetMapping("/")
+    List<DogDto> getAllDogs() {
+        return dogService.getAllDogs()
+                .stream()
+                .map(dog -> modelMapper.map(dog, DogDto.class))
+                .toList();
+    }
 
     @GetMapping("/{id}")
     public DogDto getDog(@PathVariable UUID id) {
@@ -46,6 +56,12 @@ public class DogController {
     @DeleteMapping("/delete")
     void deleteDog(@RequestBody DogDto dogDto) {
         dogService.deleteDog(dtoToDog(dogDto));
+    }
+
+    @PostMapping("/{id}/add-skill/{skillBaseDataId}")
+    DogSkillDto addSkillToDog(@PathVariable UUID id, @PathVariable UUID skillBaseDataId) {
+        var savedDogSkill = dogService.addSkillToDog(id, skillBaseDataId);
+        return modelMapper.map(savedDogSkill, DogSkillDto.class);
     }
 
     private Dog dtoToDog(DogDto dto) {
