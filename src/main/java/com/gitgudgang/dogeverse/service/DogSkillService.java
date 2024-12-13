@@ -7,7 +7,6 @@ import com.gitgudgang.dogeverse.entity.DogSkillEntity;
 import com.gitgudgang.dogeverse.repository.DogSkillJpaRepository;
 import com.gitgudgang.dogeverse.repository.RepositoryAdapter;
 import com.gitgudgang.dogeverse.repository.RepositoryAdapterImpl;
-import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 

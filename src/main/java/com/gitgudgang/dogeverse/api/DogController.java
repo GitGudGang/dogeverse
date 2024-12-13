@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -20,6 +21,14 @@ public class DogController {
 
     private final DogService dogService;
     private final ModelMapper modelMapper;
+
+    @GetMapping("/")
+    List<DogDto> getAllDogs() {
+        return dogService.getAllDogs()
+                .stream()
+                .map(dog -> modelMapper.map(dog, DogDto.class))
+                .toList();
+    }
 
     @GetMapping("/{id}")
     public DogDto getDog(@PathVariable UUID id) {
@@ -49,7 +58,6 @@ public class DogController {
         dogService.deleteDog(dtoToDog(dogDto));
     }
 
-    //add skill to dog
     @PostMapping("/{id}/add-skill/{skillBaseDataId}")
     DogSkillDto addSkillToDog(@PathVariable UUID id, @PathVariable UUID skillBaseDataId) {
         var savedDogSkill = dogService.addSkillToDog(id, skillBaseDataId);

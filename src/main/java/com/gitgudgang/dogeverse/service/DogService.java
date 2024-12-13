@@ -13,7 +13,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class DogService {
@@ -31,6 +34,11 @@ public class DogService {
         this.dogMongoRepository = new RepositoryAdapterImpl<>(dogMongoRepository, modelMapper, Dog.class, DogDocument.class);
         this.skillBaseDataService = skillBaseDataService;
         this.dogSkillService = dogSkillService;
+    }
+
+    public List<Dog> getAllDogs() {
+        return StreamSupport.stream(dogJpaRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
     }
 
     public Dog getDog(UUID id) {
