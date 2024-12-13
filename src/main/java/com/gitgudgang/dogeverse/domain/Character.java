@@ -2,6 +2,7 @@ package com.gitgudgang.dogeverse.domain;
 
 import lombok.*;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -15,5 +16,5 @@ public abstract class Character {
 
     private String name;
 
-    private Set<Stat> stats;
+    private List<Stat> stats;
 }

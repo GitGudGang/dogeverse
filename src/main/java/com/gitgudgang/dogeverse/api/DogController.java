@@ -2,6 +2,7 @@ package com.gitgudgang.dogeverse.api;
 
 import com.gitgudgang.dogeverse.domain.Dog;
 import com.gitgudgang.dogeverse.dto.DogDto;
+import com.gitgudgang.dogeverse.dto.DogSkillDto;
 import com.gitgudgang.dogeverse.service.DogService;
 
 import lombok.AllArgsConstructor;
@@ -46,6 +47,13 @@ public class DogController {
     @DeleteMapping("/delete")
     void deleteDog(@RequestBody DogDto dogDto) {
         dogService.deleteDog(dtoToDog(dogDto));
+    }
+
+    //add skill to dog
+    @PostMapping("/{id}/add-skill/{skillBaseDataId}")
+    DogSkillDto addSkillToDog(@PathVariable UUID id, @PathVariable UUID skillBaseDataId) {
+        var savedDogSkill = dogService.addSkillToDog(id, skillBaseDataId);
+        return modelMapper.map(savedDogSkill, DogSkillDto.class);
     }
 
     private Dog dtoToDog(DogDto dto) {
