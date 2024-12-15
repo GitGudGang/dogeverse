@@ -1,10 +1,10 @@
 package com.gitgudgang.dogeverse.node;
 
 
+import org.springframework.data.annotation.Version;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +24,10 @@ public class TrainerNode {
 
     @Id
     private UUID id;
+
+    @Version
+    private Long version ;
+
     private String name;
 
     @Relationship(type = "HAS_STATS", direction = Relationship.Direction.OUTGOING)

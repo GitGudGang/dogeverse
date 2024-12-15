@@ -17,19 +17,19 @@ import java.util.stream.StreamSupport;
 
 @Service
 public class SkillService {
-    private final RepositoryAdapter<Skill, SkillEntity, UUID> dogSkillJpaRepository;
+    private final RepositoryAdapter<Skill, SkillEntity, UUID> SkillJpaRepository;
 
     public SkillService(SkillJpaRepository skillJpaRepository, ModelMapper modelMapper) {
-        this.dogSkillJpaRepository = new RepositoryAdapterImpl<>(skillJpaRepository, modelMapper, Skill.class, SkillEntity.class);
+        this.SkillJpaRepository = new RepositoryAdapterImpl<>(skillJpaRepository, modelMapper, Skill.class, SkillEntity.class);
     }
 
-    public List<Skill> getAllDogSkills() {
-        return StreamSupport.stream(dogSkillJpaRepository.findAll().spliterator(), false)
+    public List<Skill> getAllSkills() {
+        return StreamSupport.stream(SkillJpaRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
 
-    Skill createAndSaveDogSkill(Dog dog, SkillBaseData skillBaseData, int statValue) {
+    Skill createAndSaveSkill(Dog dog, SkillBaseData skillBaseData, int statValue) {
         var skill = new Skill(UUID.randomUUID(), dog, skillBaseData, statValue, 0, 0);
-        return dogSkillJpaRepository.save(skill);
+        return SkillJpaRepository.save(skill);
     }
 }

@@ -29,6 +29,8 @@ public class RepositoryAdapterImpl<D, T, ID> implements RepositoryAdapter<D, T, 
         List<T> mappedEntities = StreamSupport.stream(entities.spliterator(), false)
                 .map(entity -> modelMapper.map(entity, databaseClass))
                 .collect(Collectors.toList());
+
+
         Iterable<T> savedEntities = repository.saveAll(mappedEntities);
         return StreamSupport.stream(savedEntities.spliterator(), false)
                 .map(savedEntity -> modelMapper.map(savedEntity, (Class<S>) domainClass))

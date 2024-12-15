@@ -103,6 +103,6 @@ public class DogService {
             throw new IllegalArgumentException("No Stat found for statType: " + statType);
         }
 
-        return skillService.createAndSaveDogSkill(dog, skillBaseData, statValue);
+        return skillService.createAndSaveSkill(dog, skillBaseData, statValue);
     }
 }

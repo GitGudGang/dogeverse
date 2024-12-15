@@ -1,8 +1,8 @@
 package com.gitgudgang.dogeverse.node;
 
+import org.springframework.data.annotation.Version;
 import org.springframework.data.neo4j.core.schema.Node;
 
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,17 +16,17 @@ import java.util.UUID;
 @NoArgsConstructor
 @Setter
 @Getter
-@Node("Skill")
-public class SkillNode {
+@Node("SkillBaseData")
+public class SkillBaseDataNode {
     @Id
     private UUID id;
+
+    @Version
+    private Long version;
 
     private String name;
 
     private StatType statType;
 
     private String description;
-
-    @Relationship(type = "HAS_SKILL", direction = Relationship.Direction.INCOMING)
-    private DogNode dog;
 }

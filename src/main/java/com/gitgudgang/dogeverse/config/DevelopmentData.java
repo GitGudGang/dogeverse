@@ -14,6 +14,7 @@ import com.gitgudgang.dogeverse.service.DogService;
 import com.gitgudgang.dogeverse.service.SkillBaseDataService;
 import com.gitgudgang.dogeverse.service.TrainerService;
 import com.github.javafaker.Faker;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
@@ -78,7 +79,6 @@ public class DevelopmentData implements ApplicationRunner {
                 .withDogs(dogs)
                 .build();
     }
-
     @Override
     public void run(ApplicationArguments args) {
         var skillBaseData = generateAndInsertSkillBaseData();

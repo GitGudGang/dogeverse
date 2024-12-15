@@ -1,6 +1,7 @@
 package com.gitgudgang.dogeverse.node;
 
 
+import org.springframework.data.annotation.Version;
 import org.springframework.data.neo4j.core.schema.Node;
 
 import org.springframework.data.neo4j.core.schema.Id;
@@ -19,6 +20,11 @@ import java.util.UUID;
 public class StatNode {
     @Id
     private UUID id;
+
+    @Version
+    private Long version;
+
     private StatType statType;
+
     private int statValue;
 }

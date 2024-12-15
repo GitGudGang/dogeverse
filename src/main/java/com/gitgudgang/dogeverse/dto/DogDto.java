@@ -4,7 +4,6 @@ import com.gitgudgang.dogeverse.domain.Stat;
 import lombok.*;
 
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @EqualsAndHashCode

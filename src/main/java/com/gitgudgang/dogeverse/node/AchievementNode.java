@@ -1,6 +1,6 @@
 package com.gitgudgang.dogeverse.node;
 
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
+import org.springframework.data.annotation.Version;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 
@@ -19,6 +19,9 @@ import java.util.UUID;
 public class AchievementNode {
     @Id
     private UUID id;
+
+    @Version
+    private Long version;
 
     private String name;
 }

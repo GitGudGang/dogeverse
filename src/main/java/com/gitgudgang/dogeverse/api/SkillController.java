@@ -20,7 +20,7 @@ public class SkillController {
 
     @GetMapping("/")
     List<SkillDto> getAllDogSkills() {
-        return skillService.getAllDogSkills()
+        return skillService.getAllSkills()
                 .stream()
                 .map(dogSkill -> modelMapper.map(dogSkill, SkillDto.class))
                 .toList();

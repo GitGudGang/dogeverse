@@ -1,10 +1,10 @@
 package com.gitgudgang.dogeverse.node;
 
+import org.springframework.data.annotation.Version;
 import org.springframework.data.neo4j.core.schema.Id;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.data.neo4j.core.schema.Node;
@@ -24,7 +24,12 @@ public class DogNode {
 
     @Id
     private UUID id;
+
+    @Version
+    private Long version;
+
     private String name;
+
     private String breed;
 
     @Relationship(type = "HAS_ACHIEVEMENT", direction = Relationship.Direction.OUTGOING)
@@ -37,5 +42,5 @@ public class DogNode {
     private TrainerNode trainer;
 
     @Relationship(type = "HAS_SKILL", direction = Relationship.Direction.OUTGOING)
-    private SkillNode skill;
+    private List<SkillAssignmentEdge> skills;
 }
