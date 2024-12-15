@@ -16,7 +16,7 @@ import java.util.UUID;
 @Setter
 @Getter
 @Entity
-public class DogSkillEntity {
+public class SkillEntity {
     @Id
     private UUID id;
 

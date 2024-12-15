@@ -2,7 +2,7 @@ package com.gitgudgang.dogeverse.api;
 
 import com.gitgudgang.dogeverse.domain.Dog;
 import com.gitgudgang.dogeverse.dto.DogDto;
-import com.gitgudgang.dogeverse.dto.DogSkillDto;
+import com.gitgudgang.dogeverse.dto.SkillDto;
 import com.gitgudgang.dogeverse.service.DogService;
 
 import lombok.AllArgsConstructor;
@@ -59,9 +59,9 @@ public class DogController {
     }
 
     @PostMapping("/{id}/add-skill/{skillBaseDataId}")
-    DogSkillDto addSkillToDog(@PathVariable UUID id, @PathVariable UUID skillBaseDataId) {
+    SkillDto addSkillToDog(@PathVariable UUID id, @PathVariable UUID skillBaseDataId) {
         var savedDogSkill = dogService.addSkillToDog(id, skillBaseDataId);
-        return modelMapper.map(savedDogSkill, DogSkillDto.class);
+        return modelMapper.map(savedDogSkill, SkillDto.class);
     }
 
     private Dog dtoToDog(DogDto dto) {

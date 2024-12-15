@@ -1,5 +1,6 @@
 package com.gitgudgang.dogeverse.api;
 
+import com.gitgudgang.dogeverse.domain.SkillBaseData;
 import com.gitgudgang.dogeverse.dto.SkillBaseDataDto;
 import com.gitgudgang.dogeverse.service.SkillBaseDataService;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,9 @@ public class SkillBaseDataController {
 
     @GetMapping("/")
     List<SkillBaseDataDto> getAllSkillBaseData() {
-        return modelMapper.map(skillBaseDataService.getAllSkillBaseData(), List.class);
+        return skillBaseDataService.getAllSkillBaseData()
+                .stream()
+                .map(skillBaseData -> modelMapper.map(skillBaseData, SkillBaseDataDto.class))
+                .toList();
     }
 }
