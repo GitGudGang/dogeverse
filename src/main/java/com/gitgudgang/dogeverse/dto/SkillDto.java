@@ -11,7 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-public class DogSkillDto {
+public class SkillDto {
 
     private UUID id;
 

@@ -17,5 +17,5 @@ public class Dog extends Character {
 
     private Trainer trainer;
 
-    private List<DogSkill> skills;
+    private List<Skill> skills;
 }

@@ -1,9 +1,7 @@
 package com.gitgudgang.dogeverse.api;
 
-import com.gitgudgang.dogeverse.dto.DogDto;
-import com.gitgudgang.dogeverse.dto.DogSkillDto;
-import com.gitgudgang.dogeverse.service.DogService;
-import com.gitgudgang.dogeverse.service.DogSkillService;
+import com.gitgudgang.dogeverse.dto.SkillDto;
+import com.gitgudgang.dogeverse.service.SkillService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,14 +15,14 @@ import java.util.List;
 @RequestMapping("/api/skills")
 public class SkillController {
 
-    private final DogSkillService dogSkillService;
+    private final SkillService skillService;
     private final ModelMapper modelMapper;
 
     @GetMapping("/")
-    List<DogSkillDto> getAllDogSkills() {
-        return dogSkillService.getAllDogSkills()
+    List<SkillDto> getAllDogSkills() {
+        return skillService.getAllDogSkills()
                 .stream()
-                .map(dogSkill -> modelMapper.map(dogSkill, DogSkillDto.class))
+                .map(dogSkill -> modelMapper.map(dogSkill, SkillDto.class))
                 .toList();
     }
 }

@@ -9,6 +9,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -26,8 +27,9 @@ public class SkillBaseDataService {
         return skillBaseDataJpaRepository.findById(id).orElseThrow(EntityNotFoundException::new); //TODO: Make specific exception
     }
 
-    public Iterable<SkillBaseData> getAllSkillBaseData() {
-        return skillBaseDataJpaRepository.findAll();
+    public List<SkillBaseData> getAllSkillBaseData() {
+        return StreamSupport.stream(skillBaseDataJpaRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
     }
 
     public SkillBaseData saveSkillBaseData(SkillBaseData skillBaseData) {

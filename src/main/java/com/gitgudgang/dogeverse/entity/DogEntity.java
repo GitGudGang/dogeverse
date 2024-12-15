@@ -16,5 +16,5 @@ public class DogEntity extends CharacterEntity {
     private TrainerEntity trainer;
 
     @OneToMany
-    private List<DogSkillEntity> skills;
+    private List<SkillEntity> skills;
 }
