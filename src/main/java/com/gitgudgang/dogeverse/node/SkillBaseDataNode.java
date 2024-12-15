@@ -21,9 +21,6 @@ public class SkillBaseDataNode {
     @Id
     private UUID id;
 
-    @Version
-    private Long version;
-
     private String name;
 
     private StatType statType;

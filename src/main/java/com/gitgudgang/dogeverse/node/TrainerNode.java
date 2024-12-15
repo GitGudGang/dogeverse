@@ -25,9 +25,6 @@ public class TrainerNode {
     @Id
     private UUID id;
 
-    @Version
-    private Long version ;
-
     private String name;
 
     @Relationship(type = "HAS_STATS", direction = Relationship.Direction.OUTGOING)

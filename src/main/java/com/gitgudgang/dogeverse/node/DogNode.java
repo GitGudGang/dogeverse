@@ -25,9 +25,6 @@ public class DogNode {
     @Id
     private UUID id;
 
-    @Version
-    private Long version;
-
     private String name;
 
     private String breed;
