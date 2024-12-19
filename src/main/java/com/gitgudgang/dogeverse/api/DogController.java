@@ -35,25 +35,25 @@ public class DogController {
         return modelMapper.map(dogService.getDog(id), DogDto.class);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public DogDto createDog(@RequestBody DogDto dogDto) {
         var savedDog = dogService.saveDog(dtoToDog(dogDto));
         return dogToDto(savedDog);
     }
 
-    @PutMapping("/{id}/edit")
+    @PutMapping("/{id}")
     DogDto editDog(@PathVariable UUID id, @RequestBody DogDto dogDto) {
        var editedDog = dogService.editDog(id, dtoToDog(dogDto));
        return dogToDto(editedDog);
     }
 
-    @DeleteMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     void deleteDog(@PathVariable UUID id) {
         dogService.deleteDogById(id);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("")
     void deleteDog(@RequestBody DogDto dogDto) {
         dogService.deleteDog(dtoToDog(dogDto));
     }
