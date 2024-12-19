@@ -44,25 +44,25 @@ public class TrainerController {
                              .toList();
     }
 
-    @PostMapping("/add")
+    @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public TrainerDto createTrainer(@RequestBody TrainerDto trainerDto) {
         var savedTrainer = trainerService.createTrainer(dtoToTrainer(trainerDto));
         return trainerToDto(savedTrainer);
     }
 
-    @PutMapping("/{id}/edit")
+    @PutMapping("/{id}")
     public TrainerDto editTrainer(@PathVariable UUID id, @RequestBody TrainerDto trainerDto) {
         var updatedTrainer = trainerService.updateTrainer(id, dtoToTrainer(trainerDto));
         return trainerToDto(updatedTrainer);
     }
 
-    @DeleteMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     public void deleteTrainer(@PathVariable UUID id) {
         trainerService.deleteTrainer(id);
     }
 
-    @PostMapping("/{id}/add-dog/new")
+    @PostMapping("/{id}/add-dog")
     public TrainerDto addDogToTrainer(@PathVariable UUID id, @RequestBody DogDto dogDto) {
         var updatedTrainer = trainerService.addDogToTrainer(id, modelMapper.map(dogDto, Dog.class));
         return trainerToDto(updatedTrainer);

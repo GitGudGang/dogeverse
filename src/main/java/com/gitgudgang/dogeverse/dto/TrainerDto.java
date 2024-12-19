@@ -2,13 +2,10 @@ package com.gitgudgang.dogeverse.dto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
-import com.gitgudgang.dogeverse.api.StatController;
 import com.gitgudgang.dogeverse.domain.Dog;
 import com.gitgudgang.dogeverse.domain.Stat;
-import com.gitgudgang.dogeverse.entity.DogEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -27,7 +24,7 @@ public class TrainerDto {
 
     private String name;
 
-    private ArrayList<Dog> dogs;
+    private ArrayList<DogDto> dogs;
 
-    private List<Stat> stats;
+    private List<Stat> stats; //TODO: Should contain StatDtos, not Stats
 }

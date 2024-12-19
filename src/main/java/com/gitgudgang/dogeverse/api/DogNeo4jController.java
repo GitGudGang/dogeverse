@@ -23,7 +23,7 @@ public class DogNeo4jController {
         return dogNeo4jService.getDogById(id);
     }
 
-    @GetMapping
+    @GetMapping("/")
     public List<DogDto> getAllDogs() {
         return dogNeo4jService.getAllDogs();
     }
