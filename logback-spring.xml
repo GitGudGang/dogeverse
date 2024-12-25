@@ -19,15 +19,19 @@
         </rollingPolicy>
     </appender>
 
-
-
     <!-- Custom logger configurations -->
     <logger name="org.springframework.security" level="INFO"/>
     <logger name="org.springframework.boot.autoconfigure" level="INFO"/>
     <logger name="org.springframework.web.filter" level="INFO"/>
-
-    <logger name="org.hibernate" level="INFO"/>
     <logger name="org.springframework.data" level="INFO"/>
+    <logger name="org.springframework.data.neo4j.cypher.deprecation" level="OFF"/>
+    <logger name="org.springframework.orm.jpa.JpaTransactionManager " level="INFO"/>
+    <logger name="org.neo4j" level="INFO"/>
+    <logger name="org.hibernate" level="INFO"/>
+    <logger name="com.zaxxer.hikari" level="INFO"/>
+    <logger name="org.mongodb" level="INFO"/>
+    <logger name="org.springdoc" level="INFO"/>
+    <logger name="org.springframework.web" level="INFO"/>
 
     <!-- Set the root logger level and appender -->
     <root level="INFO">

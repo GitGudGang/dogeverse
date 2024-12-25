@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.List;
 import java.util.UUID;
 @Getter
 @Setter
@@ -20,4 +21,6 @@ public class DogDocument {
 		private UUID id;
 		private String name;
 		private String breed;
+		// Could add ref to TrainerDocument, such as ID?
+		private List<SkillDocument> skills;
 	}

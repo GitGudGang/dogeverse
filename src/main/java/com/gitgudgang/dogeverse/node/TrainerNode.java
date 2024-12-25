@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -27,4 +28,7 @@ public class TrainerNode {
 
     @Relationship(type = "HAS_STATS", direction = Relationship.Direction.OUTGOING)
     private Set<StatNode> stats;
+
+    @Relationship(type = "HAS_DOGS", direction = Relationship.Direction.OUTGOING)
+    private List<DogNode> dogs;
 }

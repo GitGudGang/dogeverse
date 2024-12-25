@@ -1,10 +1,10 @@
 package com.gitgudgang.dogeverse.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Setter
 @Getter
@@ -14,4 +14,7 @@ public class DogEntity extends CharacterEntity {
 
     @ManyToOne
     private TrainerEntity trainer;
+
+    @OneToMany
+    private List<SkillEntity> skills;
 }

@@ -1,12 +1,13 @@
 package com.gitgudgang.dogeverse.entity;
 
-import com.gitgudgang.dogeverse.domain.StatType;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Range;
 
 import java.util.UUID;
 
@@ -19,14 +20,17 @@ public class SkillEntity {
     @Id
     private UUID id;
 
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "dog_id", nullable = false)
+    private DogEntity dog;
 
-    @Enumerated(EnumType.STRING)
-    private StatType statType;
+    @ManyToOne
+    @JoinColumn(name = "skill_base_data_id")
+    private SkillBaseDataEntity skillBaseData;
 
-    @Range(min = 1, max = 10)
     private int baseValue;
 
-    @Range(min = 1, max = 20)
     private int totalValue;
+
+    private int successes;
 }

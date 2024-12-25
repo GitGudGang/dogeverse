@@ -21,6 +21,4 @@ public class AchievementNode {
     private UUID id;
 
     private String name;
-
-    private int successes;
 }
