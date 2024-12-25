@@ -4,7 +4,7 @@ import com.gitgudgang.dogeverse.domain.Dog;
 import com.gitgudgang.dogeverse.entity.AchievementEntity;
 import com.gitgudgang.dogeverse.domain.builder.AchievementBuilder;
 import com.gitgudgang.dogeverse.domain.builder.DogBuilder;
-import com.gitgudgang.dogeverse.repository.AchievementRepository;
+import com.gitgudgang.dogeverse.repository.AchievementNeo4jRepository;
 import com.gitgudgang.dogeverse.service.DogService;
 import com.github.javafaker.Faker;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class DevelopmentData implements ApplicationRunner {
 
     private final Faker faker;
     private final DogService dogService;
-    private final AchievementRepository achievementRepository;
+    private final AchievementNeo4jRepository achievementRepository;
 
     private void generateAndInsertDogs(int n) {
         IntStream.range(0, n)

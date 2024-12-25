@@ -23,8 +23,12 @@ public class AchievementController {
 
     @GetMapping("/{id}")
     AchievementDto getAchievement(@PathVariable UUID id) {
-         achievementService.getAchievement(id);
-         return modelMapper.map(achievementService.getAchievement(id), AchievementDto.class);
+         return modelMapper.map(achievementService.getAchievementMysql(id), AchievementDto.class);
+    }
+
+    @GetMapping("/allReadOnly")
+    AchievementDto getAchievements() {
+         return modelMapper.map(achievementService.getAchievementsReadOnly(), AchievementDto.class);
     }
 
     @PostMapping("/success/{id}/{successes}")
@@ -35,7 +39,7 @@ public class AchievementController {
 
     @GetMapping("/checkAchievements/{id}")
     String checkAchievement(@PathVariable UUID id) {
-     String achievementNameOrNull = achievementService.checkAchievementStatus(id);
+     String achievementNameOrNull = achievementService.checkAchievementStatus(id, null);
          return achievementNameOrNull;
     }
 

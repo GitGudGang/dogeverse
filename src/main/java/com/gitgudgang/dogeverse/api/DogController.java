@@ -10,7 +10,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @RestController
 @RequestMapping("/api/dogs")
@@ -24,6 +27,16 @@ public class DogController {
     public DogDto getDog(@PathVariable UUID id) {
         return modelMapper.map(dogService.getDog(id), DogDto.class);
     }
+
+    // @GetMapping("/all")
+    // public List<DogDto> getDog() {
+        
+    //     Iterable<Dog> dogs = dogService.getAllDogs();
+           
+    //     return StreamSupport.stream(dogs.spliterator(), false)
+    //                         .map(dog -> modelMapper.map(dog, DogDto.class))
+    //                         .collect(Collectors.toList()); 
+    // }
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)

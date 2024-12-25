@@ -10,6 +10,6 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AchievementRepository extends Neo4jRepository<AchievementEntity, UUID> {
+public interface AchievementNeo4jRepository extends Neo4jRepository<AchievementEntity, UUID> {
     
 }
