@@ -1,20 +1,23 @@
 package com.gitgudgang.dogeverse.entity;
 
-import java.util.UUID;
-
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
 @Entity
-public class AchievementEntity {
+public class AchievementAdminEntity {
+
     @Id
     private UUID id;
     private String name;

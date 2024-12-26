@@ -1,8 +1,12 @@
 package com.gitgudgang.dogeverse.service;
 
 import com.gitgudgang.dogeverse.domain.Skill;
+import com.gitgudgang.dogeverse.entity.AchievementAdminEntity;
 import com.gitgudgang.dogeverse.entity.AchievementEntity;
-import com.gitgudgang.dogeverse.repository.AchievementMysqlRepository;
+import com.gitgudgang.dogeverse.entity.AchievementReadOnlyEntity;
+import com.gitgudgang.dogeverse.node.AchievementNode;
+import com.gitgudgang.dogeverse.repository.AchievementJpaAdminRepository;
+import com.gitgudgang.dogeverse.repository.AchievementJpaReadOnlyRepository;
 import com.gitgudgang.dogeverse.repository.AchievementNeo4jRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
@@ -16,42 +20,39 @@ import java.util.UUID;
 @Service
 public class AchievementService {
 
+    private AchievementJpaAdminRepository achievementJpaAdminRepository;
+    private AchievementJpaReadOnlyRepository achievementJpaReadOnlyRepository;
     private AchievementNeo4jRepository neo4jRepository;
-    private AchievementMysqlRepository mysqlRepositoryReadOnly;
-    private AchievementMysqlRepository mysqlRepository;
 
-    // public AchievementService() {}
-
-    @Autowired
     public AchievementService(
-        @Qualifier("readAccess") AchievementMysqlRepository mysqlRepositoryReadOnly,
-        AchievementMysqlRepository mysqlRepository,
+        AchievementJpaAdminRepository achievementJpaAdminRepository,
+        AchievementJpaReadOnlyRepository achievementJpaReadOnlyRepository,
         AchievementNeo4jRepository neo4jRepository
         )
         {
-            this.mysqlRepositoryReadOnly = mysqlRepositoryReadOnly;
-            this.mysqlRepository = mysqlRepository;
+            this.achievementJpaAdminRepository = achievementJpaAdminRepository;
+            this.achievementJpaReadOnlyRepository = achievementJpaReadOnlyRepository;
             this.neo4jRepository = neo4jRepository;
         }
 
-    public Iterable<AchievementEntity> getAchievementsReadOnly()
+    public Iterable<AchievementReadOnlyEntity> getAchievementsReadOnly()
     {
-        return mysqlRepositoryReadOnly.findAll();
+        return achievementJpaReadOnlyRepository.findAll();
     }
     
 
-    public AchievementEntity getAchievementNeo4j(UUID id) {
+    public AchievementNode getAchievementNeo4j(UUID id) {
         return neo4jRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Achievement with id " + id + " not found"));
     }
 
-    public AchievementEntity getAchievementMysql(UUID id) {
-        return mysqlRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Achievement with id " + id + " not found"));
+    public AchievementAdminEntity getAchievementMysql(UUID id) {
+        return achievementJpaAdminRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Achievement with id " + id + " not found"));
     }
 
-    public AchievementEntity updateSuccesses(UUID id, int successes)
+    public AchievementNode updateSuccesses(UUID id, int successes)
     {
 
-       AchievementEntity achievementEntity = neo4jRepository.findById(id).get();
+        AchievementNode achievementEntity = neo4jRepository.findById(id).get();
        achievementEntity.setSuccesses(successes);
        neo4jRepository.save(achievementEntity);
         return achievementEntity;
@@ -59,7 +60,7 @@ public class AchievementService {
 
     public String checkAchievementStatus(UUID id, Skill skill)
     {
-        AchievementEntity achievementEntity = neo4jRepository.findById(id).get();
+        AchievementNode achievementEntity = neo4jRepository.findById(id).get();
         int currentSuccesses = neo4jRepository.findById(id).get().getSuccesses();
 
         if(currentSuccesses >= achievementEntity.getBasic() && currentSuccesses < achievementEntity.getIntermediate())
@@ -78,7 +79,7 @@ public class AchievementService {
 
     public void awardAchievement(String achievementName)
     {
-        AchievementEntity achievementEntity = new AchievementEntity();
+        AchievementNode achievementEntity = new AchievementNode();
         achievementEntity.setName(achievementName);
         neo4jRepository.save(achievementEntity);
         

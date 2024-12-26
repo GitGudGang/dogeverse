@@ -1,6 +1,6 @@
 package com.gitgudgang.dogeverse.domain.builder;
 
-import com.gitgudgang.dogeverse.entity.AchievementEntity;
+import com.gitgudgang.dogeverse.entity.AchievementAdminEntity;
 import lombok.NoArgsConstructor;
 
 import java.util.UUID;
@@ -8,15 +8,15 @@ import java.util.UUID;
 @NoArgsConstructor
 public class AchievementBuilder {
     
-     private AchievementEntity achievement;
+     private AchievementAdminEntity achievement;
 
     public static AchievementBuilder create() {
         var aBuilder = new AchievementBuilder();
-        var achievement = new AchievementEntity();
+        var achievement = new AchievementAdminEntity();
         aBuilder.setAchievement(achievement);
         return aBuilder;
     }
-    private void setAchievement(AchievementEntity achievementEntity) {
+    private void setAchievement(AchievementAdminEntity achievementEntity) {
         this.achievement = achievementEntity;
     }
 
@@ -30,7 +30,7 @@ public class AchievementBuilder {
         this.achievement.setSuccesses(successCount);
     }
 
-    public AchievementEntity build() {
+    public AchievementAdminEntity build() {
         var temp = achievement;
         temp.setId(UUID.randomUUID());
         achievement = null;

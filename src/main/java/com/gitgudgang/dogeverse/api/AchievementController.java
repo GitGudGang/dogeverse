@@ -1,7 +1,9 @@
 package com.gitgudgang.dogeverse.api;
 
 import com.gitgudgang.dogeverse.dto.AchievementDto;
+import com.gitgudgang.dogeverse.entity.AchievementAdminEntity;
 import com.gitgudgang.dogeverse.entity.AchievementEntity;
+import com.gitgudgang.dogeverse.node.AchievementNode;
 import com.gitgudgang.dogeverse.service.AchievementService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -33,7 +35,7 @@ public class AchievementController {
 
     @PostMapping("/success/{id}/{successes}")
     AchievementDto updateAchievement(@PathVariable UUID id, @PathVariable int successes) {
-         AchievementEntity achievementEntity = achievementService.updateSuccesses(id, successes);
+         AchievementNode achievementEntity = achievementService.updateSuccesses(id, successes);
          return modelMapper.map(achievementEntity, AchievementDto.class);
     }
 

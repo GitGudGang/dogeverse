@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-public class AchievementEntity {
+public class AchievementReadOnlyEntity {
     @Id
     private UUID id;
     private String name;
