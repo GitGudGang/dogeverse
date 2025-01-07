@@ -72,6 +72,11 @@
             <!--<version>${springboot.version}</version>-->
         </dependency>
 
+        <dependency>
+    <groupId>com.zaxxer</groupId>
+    <artifactId>HikariCP</artifactId>
+</dependency>
+
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb -->
        <dependency>
            <groupId>org.springframework.boot</groupId>
@@ -86,6 +91,13 @@
             <version>${springboot.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.neo4j/neo4j -->
+
+<!-- Neo4j Java Driver -->
+    <!-- <dependency>
+        <groupId>org.neo4j.driver</groupId>
+        <artifactId>neo4j-java-driver</artifactId>
+    </dependency>
+</dependencies> -->
 
          <dependency>
              <groupId>com.graphql-java-kickstart</groupId>

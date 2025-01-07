@@ -45,6 +45,13 @@ public class DogService {
         return dogJpaRepository.findById(id).orElseThrow(() -> new DogNotFoundException(id, DatabaseType.MYSQL));
     }
 
+    // public Iterable<Dog> getAllDogs() {
+    //     DataSourceContextHolder.setDataSourceType("readOnly");
+    //     Iterable<Dog> dogs = dogJpaRepository.findAll();
+    //     DataSourceContextHolder.clear();
+    //     return dogs;
+    // }
+
     @Transactional
     public Dog saveDog(Dog dog) {
         dog.setId(UUID.randomUUID());

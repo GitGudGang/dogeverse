@@ -8,7 +8,8 @@ import com.gitgudgang.dogeverse.domain.builder.SkillBaseDataLoader;
 import com.gitgudgang.dogeverse.domain.builder.TrainerBuilder;
 import com.gitgudgang.dogeverse.entity.AchievementEntity;
 import com.gitgudgang.dogeverse.domain.builder.AchievementBuilder;
-import com.gitgudgang.dogeverse.repository.AchievementRepository;
+import com.gitgudgang.dogeverse.repository.AchievementMysqlRepository;
+import com.gitgudgang.dogeverse.repository.AchievementNeo4jRepository;
 import com.gitgudgang.dogeverse.repository.SkillBaseDataJpaRepository;
 import com.gitgudgang.dogeverse.service.DogService;
 import com.gitgudgang.dogeverse.service.SkillBaseDataService;
@@ -37,7 +38,7 @@ public class DevelopmentData implements ApplicationRunner {
 
     private final Faker faker;
     private final DogService dogService;
-    private final AchievementRepository achievementRepository;
+    private final AchievementMysqlRepository achievementMysqlRepository;
     private final TrainerService trainerService;
     private final SkillBaseDataService skillBaseDataService;
     private final SkillBaseDataJpaRepository skillBaseDataJpaRepository;
@@ -50,7 +51,7 @@ public class DevelopmentData implements ApplicationRunner {
     private void generateAndInsertAchievements() {
         IntStream.range(0, 3 )
                 .mapToObj(this::generateFakeAchievement)
-                .forEach(achievementRepository::save);
+                .forEach(achievementMysqlRepository::save);
     }
 
     private AchievementEntity generateFakeAchievement(int i) {

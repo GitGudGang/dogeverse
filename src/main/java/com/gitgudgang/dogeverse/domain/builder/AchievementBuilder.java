@@ -1,6 +1,7 @@
 package com.gitgudgang.dogeverse.domain.builder;
 
 import com.gitgudgang.dogeverse.entity.AchievementEntity;
+
 import lombok.NoArgsConstructor;
 
 import java.util.UUID;

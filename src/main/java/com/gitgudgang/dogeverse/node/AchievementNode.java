@@ -16,8 +16,13 @@ import java.util.UUID;
 @Getter
 @Node("Achievement")
 public class AchievementNode {
+
     @Id
     private UUID id;
-
     private String name;
+    private int successes;
+    private String description;
+    private final int basic = 50;
+    private final int intermediate = 100;
+    private final int advanced = 150;
 }
