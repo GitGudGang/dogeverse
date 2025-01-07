@@ -1,5 +1,6 @@
 package com.gitgudgang.dogeverse.document;
 
+import com.gitgudgang.dogeverse.domain.Stat;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 @Getter
 @Setter
@@ -22,4 +24,5 @@ public class DogDocument {
 		private String name;
 		private String breed;
 		private List<SkillDocument> skills;
+		private Set<Stat> stats; //TODO: Change to StatDocument
 	}
