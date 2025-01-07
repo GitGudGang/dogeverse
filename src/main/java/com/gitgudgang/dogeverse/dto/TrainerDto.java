@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import com.gitgudgang.dogeverse.domain.Dog;
 import com.gitgudgang.dogeverse.domain.Stat;
 
 import lombok.AllArgsConstructor;

@@ -4,7 +4,6 @@ import org.springframework.data.neo4j.core.schema.Id;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.data.neo4j.core.schema.Node;

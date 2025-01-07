@@ -4,7 +4,6 @@ import com.gitgudgang.dogeverse.domain.Dog;
 import com.gitgudgang.dogeverse.domain.Trainer;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor

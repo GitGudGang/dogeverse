@@ -1,6 +1,5 @@
 package com.gitgudgang.dogeverse.api;
 import com.gitgudgang.dogeverse.dto.DogDto;
-import com.gitgudgang.dogeverse.dto.neo4j.NodeDogDto;
 import com.gitgudgang.dogeverse.service.DogNeo4jService;
 
 import lombok.AllArgsConstructor;
@@ -29,7 +28,7 @@ public class DogNeo4jController {
     }
 
     @GetMapping("/names")
-    public List<NodeDogDto> getAllDogNames() {
+    public List<DogDto> getAllDogNames() {
         return dogNeo4jService.getAllDogNames();
     }
 }
