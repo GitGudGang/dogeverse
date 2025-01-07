@@ -12,9 +12,12 @@ import java.util.List;
 public class DogEntity extends CharacterEntity {
     private String breed;
 
-    @ManyToOne
+    @ManyToOne()
+    @JoinTable(name = "trainer_dogs",
+            joinColumns = @JoinColumn(name = "trainer_entity_id"),
+            inverseJoinColumns = @JoinColumn(name = "dog_entity_id"))
     private TrainerEntity trainer;
 
-    @OneToMany
+    @OneToMany(mappedBy = "dog")
     private List<SkillEntity> skills;
 }
