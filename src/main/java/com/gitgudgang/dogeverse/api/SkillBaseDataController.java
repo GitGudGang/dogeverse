@@ -1,6 +1,5 @@
 package com.gitgudgang.dogeverse.api;
 
-import com.gitgudgang.dogeverse.domain.SkillBaseData;
 import com.gitgudgang.dogeverse.dto.SkillBaseDataDto;
 import com.gitgudgang.dogeverse.service.SkillBaseDataService;
 import lombok.AllArgsConstructor;
