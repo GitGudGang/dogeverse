@@ -31,8 +31,11 @@ public class DogNeo4jService {
             .collect(Collectors.toList());
     }
 
-    public List<DogNode> getAllDogNames() {
-        return dogNeo4jRepository.getAllDogNames();
+    public List<DogDto> getAllDogNames() {
+        List<DogNode> dogsNeo4j = dogNeo4jRepository.getAllDogNames();
+        return dogsNeo4j.stream()
+            .map(dogNeo4j -> modelMapper.map(dogNeo4j, DogDto.class))
+            .collect(Collectors.toList());
     }
 }
 
