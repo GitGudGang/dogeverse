@@ -6,9 +6,9 @@ import com.gitgudgang.dogeverse.domain.Trainer;
 import com.gitgudgang.dogeverse.domain.builder.DogFactory;
 import com.gitgudgang.dogeverse.domain.builder.SkillBaseDataLoader;
 import com.gitgudgang.dogeverse.domain.builder.TrainerBuilder;
-import com.gitgudgang.dogeverse.entity.AchievementAdminEntity;
+import com.gitgudgang.dogeverse.entity.AchievementEntity;
 import com.gitgudgang.dogeverse.domain.builder.AchievementBuilder;
-import com.gitgudgang.dogeverse.repository.AchievementJpaAdminRepository;
+import com.gitgudgang.dogeverse.repository.AchievementMysqlRepository;
 import com.gitgudgang.dogeverse.repository.AchievementNeo4jRepository;
 import com.gitgudgang.dogeverse.repository.SkillBaseDataJpaRepository;
 import com.gitgudgang.dogeverse.service.DogService;
@@ -38,7 +38,7 @@ public class DevelopmentData implements ApplicationRunner {
 
     private final Faker faker;
     private final DogService dogService;
-    private final AchievementJpaAdminRepository achievementMysqlRepository;
+    private final AchievementMysqlRepository achievementMysqlRepository;
     private final TrainerService trainerService;
     private final SkillBaseDataService skillBaseDataService;
     private final SkillBaseDataJpaRepository skillBaseDataJpaRepository;
@@ -54,7 +54,7 @@ public class DevelopmentData implements ApplicationRunner {
                 .forEach(achievementMysqlRepository::save);
     }
 
-    private AchievementAdminEntity generateFakeAchievement(int i) {
+    private AchievementEntity generateFakeAchievement(int i) {
         String[] porchDefecationAchievements = new String[]{"Porch Stinker", "Master Pooper", "Life Destroyer"};
         return AchievementBuilder.create().withName(porchDefecationAchievements[i]).build();
     }

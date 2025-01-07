@@ -11,8 +11,11 @@ import java.util.UUID;
 @Setter
 public class AchievementDto {
 
-
     private UUID id;
+    private int advanced;
+    private int basic;
+    private String description;
+    private int intermediate;
     private String name;
     private int successes;
     // private final int basic = 50;

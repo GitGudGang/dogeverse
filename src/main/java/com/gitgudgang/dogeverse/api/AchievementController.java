@@ -1,18 +1,24 @@
 package com.gitgudgang.dogeverse.api;
 
+import com.gitgudgang.dogeverse.domain.Dog;
 import com.gitgudgang.dogeverse.dto.AchievementDto;
-import com.gitgudgang.dogeverse.entity.AchievementAdminEntity;
+import com.gitgudgang.dogeverse.dto.DogDto;
 import com.gitgudgang.dogeverse.entity.AchievementEntity;
 import com.gitgudgang.dogeverse.node.AchievementNode;
 import com.gitgudgang.dogeverse.service.AchievementService;
+
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -25,12 +31,17 @@ public class AchievementController {
 
     @GetMapping("/{id}")
     AchievementDto getAchievement(@PathVariable UUID id) {
-         return modelMapper.map(achievementService.getAchievementMysql(id), AchievementDto.class);
+         return modelMapper.map(achievementService.getAchievement(id), AchievementDto.class);
     }
 
-    @GetMapping("/allReadOnly")
-    AchievementDto getAchievements() {
-         return modelMapper.map(achievementService.getAchievementsReadOnly(), AchievementDto.class);
+    @GetMapping("/all")
+    List<AchievementDto> getAchievements() {
+         return achievementService.getAchievements().stream().map(achievement -> modelMapper.map(achievement, AchievementDto.class)).toList();
+    }
+
+    @GetMapping("/read/all")
+    List<AchievementDto> getAchievementsRead() {
+         return achievementService.getAchievementsRead().stream().map(achievement -> modelMapper.map(achievement, AchievementDto.class)).toList();
     }
 
     @PostMapping("/success/{id}/{successes}")
@@ -49,6 +60,11 @@ public class AchievementController {
     String award(@PathVariable String name) {
          achievementService.awardAchievement(name);;
          return "Congratulations! You are now a "+name;
+    }
+
+    private AchievementEntity dtoToAchievement(AchievementDto achievementDto) {
+          achievementDto.setId(UUID.randomUUID());
+        return modelMapper.map(achievementDto, AchievementEntity.class);
     }
 }
 

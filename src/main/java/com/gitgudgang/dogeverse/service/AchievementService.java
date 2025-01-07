@@ -1,53 +1,62 @@
 package com.gitgudgang.dogeverse.service;
 
+import com.gitgudgang.dogeverse.AchievementReadRepo.AchievementReadMysqlRepository;
+import com.gitgudgang.dogeverse.domain.Achievement;
 import com.gitgudgang.dogeverse.domain.Skill;
-import com.gitgudgang.dogeverse.entity.AchievementAdminEntity;
 import com.gitgudgang.dogeverse.entity.AchievementEntity;
-import com.gitgudgang.dogeverse.entity.AchievementReadOnlyEntity;
 import com.gitgudgang.dogeverse.node.AchievementNode;
-import com.gitgudgang.dogeverse.repository.AchievementJpaAdminRepository;
-import com.gitgudgang.dogeverse.repository.AchievementJpaReadOnlyRepository;
+import com.gitgudgang.dogeverse.repository.AchievementMysqlRepository;
 import com.gitgudgang.dogeverse.repository.AchievementNeo4jRepository;
-import jakarta.persistence.EntityNotFoundException;
-import lombok.AllArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class AchievementService {
 
-    private AchievementJpaAdminRepository achievementJpaAdminRepository;
-    private AchievementJpaReadOnlyRepository achievementJpaReadOnlyRepository;
+    private AchievementMysqlRepository mysqlRepository;
+    private AchievementReadMysqlRepository mysqlReadRepository;
     private AchievementNeo4jRepository neo4jRepository;
 
     public AchievementService(
-        AchievementJpaAdminRepository achievementJpaAdminRepository,
-        AchievementJpaReadOnlyRepository achievementJpaReadOnlyRepository,
+        AchievementMysqlRepository mysqlRepository,
+        AchievementReadMysqlRepository mysqlReadRepository,
         AchievementNeo4jRepository neo4jRepository
         )
         {
-            this.achievementJpaAdminRepository = achievementJpaAdminRepository;
-            this.achievementJpaReadOnlyRepository = achievementJpaReadOnlyRepository;
+            this.mysqlRepository = mysqlRepository;
+            this.mysqlReadRepository = mysqlReadRepository;
             this.neo4jRepository = neo4jRepository;
         }
 
-    public Iterable<AchievementReadOnlyEntity> getAchievementsReadOnly()
+        public AchievementEntity getAchievement(UUID id)
+        {
+            return mysqlRepository.findById(id).get();
+        } 
+        public List<AchievementEntity> getAchievements()
+        {
+            return StreamSupport.stream(mysqlRepository.findAll().spliterator(), false)
+                    .collect(Collectors.toList());
+        } 
+
+    public List<AchievementEntity> getAchievementsRead()
     {
-        return achievementJpaReadOnlyRepository.findAll();
-    }
-    
+        return StreamSupport.stream(mysqlReadRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
+    } 
 
     public AchievementNode getAchievementNeo4j(UUID id) {
         return neo4jRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Achievement with id " + id + " not found"));
     }
 
-    public AchievementAdminEntity getAchievementMysql(UUID id) {
-        return achievementJpaAdminRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Achievement with id " + id + " not found"));
-    }
+   
 
     public AchievementNode updateSuccesses(UUID id, int successes)
     {

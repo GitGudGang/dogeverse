@@ -1,13 +1,13 @@
 package com.gitgudgang.dogeverse.repository;
 
-
-import com.gitgudgang.dogeverse.entity.AchievementAdminEntity;
 import java.util.UUID;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.gitgudgang.dogeverse.entity.AchievementEntity;
+
 @Repository
-public interface AchievementJpaAdminRepository extends CrudRepository<AchievementAdminEntity, UUID> {
+public interface AchievementMysqlRepository extends CrudRepository<AchievementEntity,UUID>{
     
 }
-
