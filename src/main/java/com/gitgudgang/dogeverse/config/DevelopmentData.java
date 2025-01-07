@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 @RequiredArgsConstructor
 @Controller
@@ -81,13 +80,15 @@ public class DevelopmentData implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
+        clearDatabases();
+
         var skillBaseData = generateAndInsertSkillBaseData();
         log.info("SkillBaseData generated");
 
-        var dogs = generateAndInsertDogs(20);
+        var dogs = generateAndInsertDogs(6);
         log.info("Dogs generated");
 
-        generateAndInsertTrainers(5, dogs);
+        generateAndInsertTrainers(2, dogs);
         log.info("Trainers generated");
 
         generateAndInsertAchievements();
@@ -108,5 +109,10 @@ public class DevelopmentData implements ApplicationRunner {
                 .collect(Collectors.toList());
 
         return skillBaseDataService.saveAllSkillBaseData(newSkills);
+    }
+
+    private void clearDatabases() {
+        dogService.clearDatabases();
+        trainerService.clearDatabases();
     }
 }

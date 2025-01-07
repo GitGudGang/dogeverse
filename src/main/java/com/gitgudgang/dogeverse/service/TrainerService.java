@@ -90,4 +90,11 @@ public class TrainerService {
         trainer.getDogs().add(savedDog);
         return saveTrainer(trainer);
     }
+
+    @Transactional
+    public void clearDatabases() {
+        trainerJpaRepository.deleteAll();
+        trainerMongoRepository.deleteAll();
+        trainerNeo4jRepository.deleteAll();
+    }
 }

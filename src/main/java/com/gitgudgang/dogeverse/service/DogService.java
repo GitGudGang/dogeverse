@@ -27,7 +27,6 @@ public class DogService {
     private final SkillBaseDataService skillBaseDataService;
     private final SkillService skillService;
 
-
     public DogService(DogJpaRepository dogJpaRepository, DogNeo4jRepository dogNeo4jRepository, DogMongoRepository dogMongoRepository, SkillBaseDataService skillBaseDataService, SkillService skillService, ModelMapper modelMapper) {
         this.dogJpaRepository = new RepositoryAdapterImpl<>(dogJpaRepository, modelMapper, Dog.class, DogEntity.class);
         this.dogNeo4jRepository = new RepositoryAdapterImpl<>(dogNeo4jRepository, modelMapper, Dog.class, DogNode.class);
@@ -104,5 +103,12 @@ public class DogService {
         }
 
         return skillService.createAndSaveDogSkill(dog, skillBaseData, statValue);
+    }
+
+    @Transactional
+    public void clearDatabases() {
+        dogJpaRepository.deleteAll();
+        dogMongoRepository.deleteAll();
+        dogNeo4jRepository.deleteAll();
     }
 }

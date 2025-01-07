@@ -19,7 +19,6 @@ public class DogMongoService {
 
     public DogDto getDogByName(String name) {
         DogDocument dogDocument = dogMongoRepository.findDogByName(name);
-        if (dogDocument == null) throw new EntityNotFoundException("DogDocument not found");
         return modelMapper.map(dogDocument, DogDto.class);
     }
 

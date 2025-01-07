@@ -19,12 +19,12 @@ import lombok.AllArgsConstructor;
 public class DogMongoController {
     private final DogMongoService dogMongoService;
 
-    @GetMapping("/{name}")
+    @GetMapping("/name/{name}")
     public DogDto getDogByName(@PathVariable String name) {
         return dogMongoService.getDogByName(name);
     }
 
-    @GetMapping("/{breed}")
+    @GetMapping("/breed/{breed}")
     public List<DogDto> getAllDogsByBreed(@PathVariable String breed) {
         return dogMongoService.getAllDogsByBreed(breed);
     }

@@ -21,6 +21,5 @@ public class DogDocument {
 		private UUID id;
 		private String name;
 		private String breed;
-		// Could add ref to TrainerDocument, such as ID?
 		private List<SkillDocument> skills;
 	}

@@ -18,6 +18,6 @@ public class DogEntity extends CharacterEntity {
             inverseJoinColumns = @JoinColumn(name = "dog_entity_id"))
     private TrainerEntity trainer;
 
-    @OneToMany(mappedBy = "dog")
+    @OneToMany(mappedBy = "dog", cascade = CascadeType.ALL)
     private List<SkillEntity> skills;
 }
