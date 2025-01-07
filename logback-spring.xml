@@ -32,6 +32,8 @@
     <logger name="org.mongodb" level="INFO"/>
     <logger name="org.springdoc" level="INFO"/>
     <logger name="org.springframework.web" level="INFO"/>
+    <logger name="org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport" level="WARN"/>
+    <logger name="org.springframework.data.neo4j.core.mapping.DefaultNeo4jIsNewStrategy" level="ERROR"/>
 
     <!-- Set the root logger level and appender -->
     <root level="INFO">

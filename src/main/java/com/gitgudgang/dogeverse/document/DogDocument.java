@@ -23,6 +23,6 @@ public class DogDocument {
 		private UUID id;
 		private String name;
 		private String breed;
+		private Set<Stat> stats;
 		private List<SkillDocument> skills;
-		private Set<Stat> stats; //TODO: Change to StatDocument
 	}

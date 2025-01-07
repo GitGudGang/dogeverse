@@ -24,4 +24,5 @@ public class SkillDocument {
     private int baseValue;
     private int totalValue;
     private int successes;
+    private UUID dogId;
 }

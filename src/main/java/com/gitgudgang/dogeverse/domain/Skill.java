@@ -18,9 +18,9 @@ public class Skill {
 
     private SkillBaseData skillBaseData;
 
-    private int baseValue; //TODO: baseValue is the associated stat of the dog
+    private int baseValue;
 
-    private int totalValue; //TODO: For each 10 successes, totalValue goes up by 1
+    private int totalValue;
 
     private int successes;
 }
