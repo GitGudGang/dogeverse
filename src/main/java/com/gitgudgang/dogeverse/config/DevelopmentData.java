@@ -79,6 +79,7 @@ public class DevelopmentData implements ApplicationRunner {
                 .build();
     }
 
+
     @Override
     public void run(ApplicationArguments args) {
         var skillBaseData = generateAndInsertSkillBaseData();

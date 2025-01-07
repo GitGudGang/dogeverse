@@ -35,7 +35,7 @@ public class DogController {
         return modelMapper.map(dogService.getDog(id), DogDto.class);
     }
 
-    @PostMapping("/")
+    @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public DogDto createDog(@RequestBody DogDto dogDto) {
         var savedDog = dogService.saveDog(dtoToDog(dogDto));

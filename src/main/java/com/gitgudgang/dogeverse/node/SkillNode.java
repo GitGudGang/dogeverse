@@ -12,6 +12,8 @@ import org.springframework.data.neo4j.core.schema.Relationship;
 
 import java.util.UUID;
 
+import java.util.UUID;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
