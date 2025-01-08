@@ -1,9 +1,6 @@
 package com.gitgudgang.dogeverse.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +11,6 @@ import java.util.List;
 @Getter
 @Entity
 public class TrainerEntity extends CharacterEntity {
-    @OneToMany(mappedBy = "trainer")
+    @OneToMany(mappedBy = "trainer", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<DogEntity> dogs;
 }
