@@ -5,15 +5,15 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import com.gitgudgang.dogeverse.domain.Dog;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gitgudgang.dogeverse.document.TrainerDocument;
-import com.gitgudgang.dogeverse.domain.DatabaseType;
-import com.gitgudgang.dogeverse.domain.Trainer;
-import com.gitgudgang.dogeverse.entity.TrainerEntity;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.document.TrainerDocument;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.DatabaseType;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.DogClass;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.TrainerClass;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.entity.Trainer;
 import com.gitgudgang.dogeverse.exception.TrainerNotFoundException;
 import com.gitgudgang.dogeverse.node.TrainerNode;
 import com.gitgudgang.dogeverse.repository.RepositoryAdapter;
@@ -25,9 +25,9 @@ import com.gitgudgang.dogeverse.repository.TrainerNeo4jRepository;
 @Service
 public class TrainerService {
 
-    private final RepositoryAdapter<Trainer, TrainerEntity, UUID> trainerJpaRepository;
-    private final RepositoryAdapter<Trainer, TrainerNode, UUID> trainerNeo4jRepository;
-    private final RepositoryAdapter<Trainer, TrainerDocument, UUID> trainerMongoRepository;
+    private final RepositoryAdapter<TrainerClass, Trainer, UUID> trainerJpaRepository;
+    private final RepositoryAdapter<TrainerClass, TrainerNode, UUID> trainerNeo4jRepository;
+    private final RepositoryAdapter<TrainerClass, TrainerDocument, UUID> trainerMongoRepository;
     private final DogService dogService;
 
     public TrainerService(
@@ -36,28 +36,28 @@ public class TrainerService {
             TrainerMongoRepository trainerMongoRepository,
             ModelMapper modelMapper, DogService dogService
     ) {
-        this.trainerJpaRepository = new RepositoryAdapterImpl<>(trainerJpaRepository, modelMapper, Trainer.class, TrainerEntity.class);
-        this.trainerNeo4jRepository = new RepositoryAdapterImpl<>(trainerNeo4jRepository, modelMapper, Trainer.class, TrainerNode.class);
-        this.trainerMongoRepository = new RepositoryAdapterImpl<>(trainerMongoRepository, modelMapper, Trainer.class, TrainerDocument.class);
+        this.trainerJpaRepository = new RepositoryAdapterImpl<>(trainerJpaRepository, modelMapper, TrainerClass.class, Trainer.class);
+        this.trainerNeo4jRepository = new RepositoryAdapterImpl<>(trainerNeo4jRepository, modelMapper, TrainerClass.class, TrainerNode.class);
+        this.trainerMongoRepository = new RepositoryAdapterImpl<>(trainerMongoRepository, modelMapper, TrainerClass.class, TrainerDocument.class);
         this.dogService = dogService;
     }
 
-    public Trainer getTrainer(UUID id) {
+    public TrainerClass getTrainer(UUID id) {
         return trainerJpaRepository.findById(id).orElseThrow(() -> new TrainerNotFoundException(id, DatabaseType.MYSQL));
     }
 
-     public List<Trainer> getAllTrainers() {
+     public List<TrainerClass> getAllTrainers() {
         return StreamSupport.stream(trainerJpaRepository.findAll().spliterator(), false)
                             .collect(Collectors.toList());
     }
 
     @Transactional
-    public Trainer createTrainer(Trainer trainer) {
+    public TrainerClass createTrainer(TrainerClass trainer) {
         trainer.setId(UUID.randomUUID());
         return saveTrainer(trainer);
     }
 
-    private Trainer saveTrainer(Trainer trainer) {
+    private TrainerClass saveTrainer(TrainerClass trainer) {
         trainerJpaRepository.save(trainer);
         trainerNeo4jRepository.save(trainer);
         trainerMongoRepository.save(trainer);
@@ -65,7 +65,7 @@ public class TrainerService {
     }
 
     @Transactional
-    public Trainer updateTrainer(UUID id, Trainer trainer) {
+    public TrainerClass updateTrainer(UUID id, TrainerClass trainer) {
 
         trainerJpaRepository.findById(id).orElseThrow(() -> new TrainerNotFoundException(id, DatabaseType.MYSQL));
         trainerNeo4jRepository.findById(id).orElseThrow(() -> new TrainerNotFoundException(id, DatabaseType.NEO4J));
@@ -84,7 +84,7 @@ public class TrainerService {
     }
 
     @Transactional
-    public Trainer addDogToTrainer(UUID id, Dog dog) {
+    public TrainerClass addDogToTrainer(UUID id, DogClass dog) {
         var trainer = getTrainer(id);
         var savedDog = dogService.saveDog(dog);
         trainer.getDogs().add(savedDog);

@@ -1,9 +1,9 @@
 package com.gitgudgang.dogeverse.api;
 
-import com.gitgudgang.dogeverse.domain.Dog;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.DogClass;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.entity.Achievement;
 import com.gitgudgang.dogeverse.dto.AchievementDto;
 import com.gitgudgang.dogeverse.dto.DogDto;
-import com.gitgudgang.dogeverse.entity.AchievementEntity;
 import com.gitgudgang.dogeverse.node.AchievementNode;
 import com.gitgudgang.dogeverse.service.AchievementService;
 
@@ -62,9 +62,9 @@ public class AchievementController {
          return "Congratulations! You are now a "+name;
     }
 
-    private AchievementEntity dtoToAchievement(AchievementDto achievementDto) {
+    private Achievement dtoToAchievement(AchievementDto achievementDto) {
           achievementDto.setId(UUID.randomUUID());
-        return modelMapper.map(achievementDto, AchievementEntity.class);
+        return modelMapper.map(achievementDto, Achievement.class);
     }
 }
 

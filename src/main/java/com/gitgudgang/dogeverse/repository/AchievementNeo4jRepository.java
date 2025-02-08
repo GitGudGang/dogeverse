@@ -1,6 +1,4 @@
 package com.gitgudgang.dogeverse.repository;
-
-import com.gitgudgang.dogeverse.entity.AchievementEntity;
 import com.gitgudgang.dogeverse.node.AchievementNode;
 
 import java.util.UUID;

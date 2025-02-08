@@ -1,6 +1,6 @@
 package com.gitgudgang.dogeverse.api;
 
-import com.gitgudgang.dogeverse.domain.Dog;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.DogClass;
 import com.gitgudgang.dogeverse.dto.DogDto;
 import com.gitgudgang.dogeverse.dto.SkillDto;
 import com.gitgudgang.dogeverse.service.DogService;
@@ -66,11 +66,11 @@ public class DogController {
         return modelMapper.map(savedDogSkill, SkillDto.class);
     }
 
-    private Dog dtoToDog(DogDto dto) {
-        return modelMapper.map(dto, Dog.class);
+    private DogClass dtoToDog(DogDto dto) {
+        return modelMapper.map(dto, DogClass.class);
     }
 
-    private DogDto dogToDto(Dog dog) {
+    private DogDto dogToDto(DogClass dog) {
         return modelMapper.map(dog, DogDto.class);
     }
 }

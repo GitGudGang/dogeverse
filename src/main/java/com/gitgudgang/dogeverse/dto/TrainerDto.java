@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import com.gitgudgang.dogeverse.domain.Stat;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.StatClass;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -25,5 +25,5 @@ public class TrainerDto {
 
     private ArrayList<DogDto> dogs;
 
-    private List<Stat> stats; //TODO: Should contain StatDtos, not Stats
+    private List<StatClass> stats; //TODO: Should contain StatDtos, not Stats
 }

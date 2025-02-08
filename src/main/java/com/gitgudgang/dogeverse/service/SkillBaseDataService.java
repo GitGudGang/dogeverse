@@ -1,7 +1,7 @@
 package com.gitgudgang.dogeverse.service;
 
-import com.gitgudgang.dogeverse.domain.SkillBaseData;
-import com.gitgudgang.dogeverse.entity.SkillBaseDataEntity;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.SkillBaseDataClass;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.entity.SkillBaseData;
 import com.gitgudgang.dogeverse.repository.RepositoryAdapter;
 import com.gitgudgang.dogeverse.repository.RepositoryAdapterImpl;
 import com.gitgudgang.dogeverse.repository.SkillBaseDataJpaRepository;
@@ -17,26 +17,26 @@ import java.util.stream.StreamSupport;
 
 @Service
 public class SkillBaseDataService {
-    private final RepositoryAdapter<SkillBaseData, SkillBaseDataEntity, UUID> skillBaseDataJpaRepository;
+    private final RepositoryAdapter<SkillBaseDataClass, SkillBaseData, UUID> skillBaseDataJpaRepository;
 
     public SkillBaseDataService(SkillBaseDataJpaRepository skillBaseDataJpaRepository, ModelMapper modelMapper) {
-        this.skillBaseDataJpaRepository = new RepositoryAdapterImpl<>(skillBaseDataJpaRepository,modelMapper, SkillBaseData.class, SkillBaseDataEntity.class);
+        this.skillBaseDataJpaRepository = new RepositoryAdapterImpl<>(skillBaseDataJpaRepository,modelMapper, SkillBaseDataClass.class, SkillBaseData.class);
     }
 
-    public SkillBaseData getSkillBaseData(UUID id) {
+    public SkillBaseDataClass getSkillBaseData(UUID id) {
         return skillBaseDataJpaRepository.findById(id).orElseThrow(EntityNotFoundException::new); //TODO: Make specific exception
     }
 
-    public List<SkillBaseData> getAllSkillBaseData() {
+    public List<SkillBaseDataClass> getAllSkillBaseData() {
         return StreamSupport.stream(skillBaseDataJpaRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
 
-    public SkillBaseData saveSkillBaseData(SkillBaseData skillBaseData) {
+    public SkillBaseDataClass saveSkillBaseData(SkillBaseDataClass skillBaseData) {
         return skillBaseDataJpaRepository.save(skillBaseData);
     }
 
-    public Set<SkillBaseData> saveAllSkillBaseData(Iterable<SkillBaseData> skillBaseDatas) {
+    public Set<SkillBaseDataClass> saveAllSkillBaseData(Iterable<SkillBaseDataClass> skillBaseDatas) {
         skillBaseDatas.forEach(skill -> skill.setId(UUID.randomUUID()));
         var saved = skillBaseDataJpaRepository.saveAll(skillBaseDatas);
         return StreamSupport.stream(saved.spliterator(), false)

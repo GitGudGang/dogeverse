@@ -1,6 +1,6 @@
 package com.gitgudgang.dogeverse.service;
 
-import com.gitgudgang.dogeverse.document.DogDocument;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.document.DogDocument;
 import com.gitgudgang.dogeverse.dto.DogDto;
 import com.gitgudgang.dogeverse.repository.DogMongoRepository;
 import jakarta.persistence.EntityNotFoundException;

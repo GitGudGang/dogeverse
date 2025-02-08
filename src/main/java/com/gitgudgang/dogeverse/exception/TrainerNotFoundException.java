@@ -2,7 +2,7 @@ package com.gitgudgang.dogeverse.exception;
 
 import java.util.UUID;
 
-import com.gitgudgang.dogeverse.domain.DatabaseType;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.DatabaseType;
 
 import jakarta.persistence.EntityNotFoundException;
 

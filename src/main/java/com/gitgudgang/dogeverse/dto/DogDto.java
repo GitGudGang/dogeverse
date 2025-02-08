@@ -1,10 +1,11 @@
 package com.gitgudgang.dogeverse.dto;
 
-import com.gitgudgang.dogeverse.domain.Stat;
 import lombok.*;
 
 import java.util.List;
 import java.util.UUID;
+
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.StatClass;
 
 @EqualsAndHashCode
 @AllArgsConstructor
@@ -19,5 +20,5 @@ public class DogDto {
 
     private String breed;
 
-    private List<Stat> stats;
+    private List<StatClass> stats;
 }

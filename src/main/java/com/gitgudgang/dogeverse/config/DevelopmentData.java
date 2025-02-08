@@ -1,13 +1,15 @@
 package com.gitgudgang.dogeverse.config;
 
-import com.gitgudgang.dogeverse.domain.Dog;
-import com.gitgudgang.dogeverse.domain.SkillBaseData;
-import com.gitgudgang.dogeverse.domain.Trainer;
-import com.gitgudgang.dogeverse.domain.builder.DogFactory;
-import com.gitgudgang.dogeverse.domain.builder.SkillBaseDataLoader;
-import com.gitgudgang.dogeverse.domain.builder.TrainerBuilder;
-import com.gitgudgang.dogeverse.entity.AchievementEntity;
-import com.gitgudgang.dogeverse.domain.builder.AchievementBuilder;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.AchievementClass;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.Achievements;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.DogClass;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.SkillBaseDataClass;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.TrainerClass;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.builder.AchievementBuilder;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.builder.DogFactory;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.builder.SkillBaseDataLoader;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.builder.TrainerBuilder;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.entity.Achievement;
 import com.gitgudgang.dogeverse.repository.AchievementMysqlRepository;
 import com.gitgudgang.dogeverse.repository.AchievementNeo4jRepository;
 import com.gitgudgang.dogeverse.repository.SkillBaseDataJpaRepository;
@@ -26,6 +28,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -43,7 +46,7 @@ public class DevelopmentData implements ApplicationRunner {
     private final SkillBaseDataService skillBaseDataService;
     private final SkillBaseDataJpaRepository skillBaseDataJpaRepository;
 
-    private List<Dog> generateAndInsertDogs(int n) {
+    private List<DogClass> generateAndInsertDogs(int n) {
         var dogs = DogFactory.createDogs(n);
         return dogs.stream().map(dogService::saveDog).toList();
     }
@@ -54,25 +57,51 @@ public class DevelopmentData implements ApplicationRunner {
                 .forEach(achievementMysqlRepository::save);
     }
 
-    private AchievementEntity generateFakeAchievement(int i) {
-        String[] porchDefecationAchievements = new String[]{"Porch Stinker", "Master Pooper", "Life Destroyer"};
-        return AchievementBuilder.create().withName(porchDefecationAchievements[i]).build();
+    private Achievement generateFakeAchievement(int i) {
+        
+        Achievement achievement = new Achievement();
+        
+        switch (i) {
+            case 0:
+            achievement.setAchievementId(UUID.randomUUID());
+            achievement.setAwardTitle(Achievements.BASIC.getTitle());
+            achievement.setDescription(Achievements.BASIC.getDescription());
+            achievement.setTriggerPoints(Achievements.BASIC.getTriggerPoint());
+                break;
+            case 1:
+            achievement.setAchievementId(UUID.randomUUID());
+            achievement.setAwardTitle(Achievements.MODERATE.getTitle());
+            achievement.setDescription(Achievements.MODERATE.getDescription());
+            achievement.setTriggerPoints(Achievements.MODERATE.getTriggerPoint());
+                break;
+            case 2:
+            achievement.setAchievementId(UUID.randomUUID());
+            achievement.setAwardTitle(Achievements.ADVANCED.getTitle());
+            achievement.setDescription(Achievements.ADVANCED.getDescription());
+            achievement.setTriggerPoints(Achievements.ADVANCED.getTriggerPoint());
+                break;
+        
+            default:
+                break;
+        }
+
+        return achievement;
     }
 
-    private void generateAndInsertTrainers(int n, List<Dog> dogs) {
-        List<Dog> mutableDogs = new ArrayList<>(dogs);
+    private void generateAndInsertTrainers(int n, List<DogClass> dogs) {
+        List<DogClass> mutableDogs = new ArrayList<>(dogs);
         int dogsPerTrainer = mutableDogs.size() / n;
         int remainder = mutableDogs.size() % n;
 
         for (int i = 0; i < n; i++) {
             int chunkSize = dogsPerTrainer + (i == n - 1 ? remainder : 0);
-            List<Dog> currentChunk = new ArrayList<>(mutableDogs.subList(0, chunkSize));
+            List<DogClass> currentChunk = new ArrayList<>(mutableDogs.subList(0, chunkSize));
             mutableDogs.subList(0, chunkSize).clear();
             trainerService.createTrainer(generateTrainer(currentChunk));
         }
     }
 
-    private Trainer generateTrainer(List<Dog> dogs) {
+    private TrainerClass generateTrainer(List<DogClass> dogs) {
         return TrainerBuilder.create()
                 .withName(faker.name().firstName())
                 .withStats()
@@ -95,7 +124,7 @@ public class DevelopmentData implements ApplicationRunner {
         log.info("Achievements generated");
     }
 
-    private Iterable<SkillBaseData> generateAndInsertSkillBaseData() {
+    private Iterable<SkillBaseDataClass> generateAndInsertSkillBaseData() {
         var skillBaseDataFromFile = SkillBaseDataLoader.loadSkillBaseData();
         var existingSkillBaseData = skillBaseDataJpaRepository.findAll();
 

@@ -1,10 +1,10 @@
 package com.gitgudgang.dogeverse.service;
 
-import com.gitgudgang.dogeverse.document.DogDocument;
-import com.gitgudgang.dogeverse.domain.DatabaseType;
-import com.gitgudgang.dogeverse.domain.Dog;
-import com.gitgudgang.dogeverse.domain.Skill;
-import com.gitgudgang.dogeverse.entity.DogEntity;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.document.DogDocument;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.DatabaseType;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.DogClass;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.SkillClass;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.entity.Dog;
 import com.gitgudgang.dogeverse.exception.DogNotFoundException;
 import com.gitgudgang.dogeverse.node.DogNode;
 import com.gitgudgang.dogeverse.repository.*;
@@ -21,27 +21,27 @@ import java.util.stream.StreamSupport;
 @Service
 public class DogService {
 
-    private final RepositoryAdapter<Dog, DogEntity, UUID> dogJpaRepository;
-    private final RepositoryAdapter<Dog, DogNode, UUID> dogNeo4jRepository;
-    private final RepositoryAdapter<Dog, DogDocument, UUID> dogMongoRepository;
+    private final RepositoryAdapter<DogClass, Dog, UUID> dogJpaRepository;
+    private final RepositoryAdapter<DogClass, DogNode, UUID> dogNeo4jRepository;
+    private final RepositoryAdapter<DogClass, DogDocument, UUID> dogMongoRepository;
     private final SkillBaseDataService skillBaseDataService;
     private final SkillService skillService;
 
 
     public DogService(DogJpaRepository dogJpaRepository, DogNeo4jRepository dogNeo4jRepository, DogMongoRepository dogMongoRepository, SkillBaseDataService skillBaseDataService, SkillService skillService, ModelMapper modelMapper) {
-        this.dogJpaRepository = new RepositoryAdapterImpl<>(dogJpaRepository, modelMapper, Dog.class, DogEntity.class);
-        this.dogNeo4jRepository = new RepositoryAdapterImpl<>(dogNeo4jRepository, modelMapper, Dog.class, DogNode.class);
-        this.dogMongoRepository = new RepositoryAdapterImpl<>(dogMongoRepository, modelMapper, Dog.class, DogDocument.class);
+        this.dogJpaRepository = new RepositoryAdapterImpl<>(dogJpaRepository, modelMapper, DogClass.class, Dog.class);
+        this.dogNeo4jRepository = new RepositoryAdapterImpl<>(dogNeo4jRepository, modelMapper, DogClass.class, DogNode.class);
+        this.dogMongoRepository = new RepositoryAdapterImpl<>(dogMongoRepository, modelMapper, DogClass.class, DogDocument.class);
         this.skillBaseDataService = skillBaseDataService;
         this.skillService = skillService;
     }
 
-    public List<Dog> getAllDogs() {
+    public List<DogClass> getAllDogs() {
         return StreamSupport.stream(dogJpaRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
 
-    public Dog getDog(UUID id) {
+    public DogClass getDog(UUID id) {
         return dogJpaRepository.findById(id).orElseThrow(() -> new DogNotFoundException(id, DatabaseType.MYSQL));
     }
 
@@ -53,7 +53,7 @@ public class DogService {
     // }
 
     @Transactional
-    public Dog saveDog(Dog dog) {
+    public DogClass saveDog(DogClass dog) {
         dog.setId(UUID.randomUUID());
         dogJpaRepository.save(dog);
         dogNeo4jRepository.save(dog);
@@ -62,7 +62,7 @@ public class DogService {
     }
 
     @Transactional
-    public void deleteDog(Dog dog) {
+    public void deleteDog(DogClass dog) {
         dogJpaRepository.delete(dog);
         dogMongoRepository.delete(dog);
         dogNeo4jRepository.delete(dog);
@@ -76,7 +76,7 @@ public class DogService {
     }
 
     @Transactional
-    public Dog editDog(UUID id, Dog dog) {
+    public DogClass editDog(UUID id, DogClass dog) {
         var existingDog = dogJpaRepository.findById(id).orElseThrow(() -> new DogNotFoundException(id, DatabaseType.MYSQL));
 
         if (!existingDog.equals(dog)) {
@@ -93,7 +93,7 @@ public class DogService {
         return dog;
     }
 
-    public Skill addSkillToDog(UUID id, UUID skillBaseDataId) {
+    public SkillClass addSkillToDog(UUID id, UUID skillBaseDataId) {
 
         var dog = dogJpaRepository.findById(id).orElseThrow(() -> new DogNotFoundException(id, DatabaseType.MYSQL));
 

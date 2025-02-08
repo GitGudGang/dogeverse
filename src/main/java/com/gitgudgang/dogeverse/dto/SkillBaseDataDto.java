@@ -1,12 +1,13 @@
 package com.gitgudgang.dogeverse.dto;
 
-import com.gitgudgang.dogeverse.domain.StatType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.UUID;
+
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.AttackTypeClass;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +18,7 @@ public class SkillBaseDataDto {
 
     private String name;
 
-    private StatType statType;
+    private AttackTypeClass statType;
 
     private String description;
 }

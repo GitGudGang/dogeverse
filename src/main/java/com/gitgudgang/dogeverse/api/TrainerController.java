@@ -3,7 +3,8 @@ package com.gitgudgang.dogeverse.api;
 import java.util.List;
 import java.util.UUID;
 
-import com.gitgudgang.dogeverse.domain.Dog;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.DogClass;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.TrainerClass;
 import com.gitgudgang.dogeverse.dto.DogDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gitgudgang.dogeverse.domain.Trainer;
 import com.gitgudgang.dogeverse.dto.TrainerDto;
 import com.gitgudgang.dogeverse.service.TrainerService;
 
@@ -64,15 +64,15 @@ public class TrainerController {
 
     @PostMapping("/{id}/add-dog")
     public TrainerDto addDogToTrainer(@PathVariable UUID id, @RequestBody DogDto dogDto) {
-        var updatedTrainer = trainerService.addDogToTrainer(id, modelMapper.map(dogDto, Dog.class));
+        var updatedTrainer = trainerService.addDogToTrainer(id, modelMapper.map(dogDto, DogClass.class));
         return trainerToDto(updatedTrainer);
     }
 
-    private Trainer dtoToTrainer(TrainerDto dto) {
-        return modelMapper.map(dto, Trainer.class);
+    private TrainerClass dtoToTrainer(TrainerDto dto) {
+        return modelMapper.map(dto, TrainerClass.class);
     }
 
-    private TrainerDto trainerToDto(Trainer trainer) {
+    private TrainerDto trainerToDto(TrainerClass trainer) {
         return modelMapper.map(trainer, TrainerDto.class);
     }
 }

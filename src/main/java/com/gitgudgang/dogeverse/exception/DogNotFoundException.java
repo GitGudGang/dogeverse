@@ -1,9 +1,10 @@
 package com.gitgudgang.dogeverse.exception;
 
-import com.gitgudgang.dogeverse.domain.DatabaseType;
 import jakarta.persistence.EntityNotFoundException;
 
 import java.util.UUID;
+
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.DatabaseType;
 
 public class DogNotFoundException extends EntityNotFoundException {
     private static final String idMessage = "Dog with id '%s' not found ";

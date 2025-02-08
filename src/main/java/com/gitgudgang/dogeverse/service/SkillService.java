@@ -1,9 +1,9 @@
 package com.gitgudgang.dogeverse.service;
 
-import com.gitgudgang.dogeverse.domain.Dog;
-import com.gitgudgang.dogeverse.domain.Skill;
-import com.gitgudgang.dogeverse.domain.SkillBaseData;
-import com.gitgudgang.dogeverse.entity.SkillEntity;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.DogClass;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.SkillBaseDataClass;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.SkillClass;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.entity.Skill;
 import com.gitgudgang.dogeverse.repository.SkillJpaRepository;
 import com.gitgudgang.dogeverse.repository.RepositoryAdapter;
 import com.gitgudgang.dogeverse.repository.RepositoryAdapterImpl;
@@ -17,19 +17,19 @@ import java.util.stream.StreamSupport;
 
 @Service
 public class SkillService {
-    private final RepositoryAdapter<Skill, SkillEntity, UUID> dogSkillJpaRepository;
+    private final RepositoryAdapter<SkillClass, Skill, UUID> dogSkillJpaRepository;
 
     public SkillService(SkillJpaRepository skillJpaRepository, ModelMapper modelMapper) {
-        this.dogSkillJpaRepository = new RepositoryAdapterImpl<>(skillJpaRepository, modelMapper, Skill.class, SkillEntity.class);
+        this.dogSkillJpaRepository = new RepositoryAdapterImpl<>(skillJpaRepository, modelMapper, SkillClass.class, Skill.class);
     }
 
-    public List<Skill> getAllDogSkills() {
+    public List<SkillClass> getAllDogSkills() {
         return StreamSupport.stream(dogSkillJpaRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
 
-    Skill createAndSaveDogSkill(Dog dog, SkillBaseData skillBaseData, int statValue) {
-        var skill = new Skill(UUID.randomUUID(), dog, skillBaseData, statValue, 0, 0);
+    SkillClass createAndSaveDogSkill(DogClass dog, SkillBaseDataClass skillBaseData, int statValue) {
+        var skill = new SkillClass(UUID.randomUUID(), dog, skillBaseData, statValue, 0, 0);
         return dogSkillJpaRepository.save(skill);
     }
 }

@@ -1,9 +1,9 @@
 package com.gitgudgang.dogeverse.service;
 
 import com.gitgudgang.dogeverse.AchievementReadRepo.AchievementReadMysqlRepository;
-import com.gitgudgang.dogeverse.domain.Achievement;
-import com.gitgudgang.dogeverse.domain.Skill;
-import com.gitgudgang.dogeverse.entity.AchievementEntity;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.AchievementClass;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.domain.SkillClass;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.entity.Achievement;
 import com.gitgudgang.dogeverse.node.AchievementNode;
 import com.gitgudgang.dogeverse.repository.AchievementMysqlRepository;
 import com.gitgudgang.dogeverse.repository.AchievementNeo4jRepository;
@@ -36,17 +36,17 @@ public class AchievementService {
             this.neo4jRepository = neo4jRepository;
         }
 
-        public AchievementEntity getAchievement(UUID id)
+        public Achievement getAchievement(UUID id)
         {
             return mysqlRepository.findById(id).get();
         } 
-        public List<AchievementEntity> getAchievements()
+        public List<Achievement> getAchievements()
         {
             return StreamSupport.stream(mysqlRepository.findAll().spliterator(), false)
                     .collect(Collectors.toList());
         } 
 
-    public List<AchievementEntity> getAchievementsRead()
+    public List<Achievement> getAchievementsRead()
     {
         return StreamSupport.stream(mysqlReadRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
@@ -67,7 +67,7 @@ public class AchievementService {
         return achievementEntity;
     }
 
-    public String checkAchievementStatus(UUID id, Skill skill)
+    public String checkAchievementStatus(UUID id, SkillClass skill)
     {
         AchievementNode achievementEntity = neo4jRepository.findById(id).get();
         int currentSuccesses = neo4jRepository.findById(id).get().getSuccesses();

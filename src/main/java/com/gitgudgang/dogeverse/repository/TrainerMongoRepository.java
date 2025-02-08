@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.gitgudgang.dogeverse.document.TrainerDocument;
+import com.gitgudgang.dogeverse.Datasources.Primary.models.document.TrainerDocument;
 
 @Repository
 public interface TrainerMongoRepository extends MongoRepository<TrainerDocument, UUID> {
